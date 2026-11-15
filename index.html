@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test · Administración de Sistemas Inteligentes</title>
+  <style>
+    :root {
+      --bg: #f3f5fb;
+      --bg-soft: #e9edf7;
+      --surface: #ffffff;
+      --surface-2: #f8f9fd;
+      --text: #172033;
+      --muted: #667085;
+      --border: #e2e6f0;
+      --primary: #5146e5;
+      --primary-dark: #4036c9;
+      --primary-soft: #eeecff;
+      --teal: #0f766e;
+      --teal-soft: #e6fffa;
+      --green: #15803d;
+      --green-soft: #e9f9ef;
+      --red: #c2413b;
+      --red-soft: #fff0ef;
+      --amber: #b45309;
+      --amber-soft: #fff7e6;
+      --shadow: 0 18px 45px rgba(23, 32, 51, .08);
+      --shadow-sm: 0 4px 16px rgba(23, 32, 51, .06);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --font: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
+    [data-theme="dark"] {
+      --bg: #0c111d;
+      --bg-soft: #111827;
+      --surface: #151d2e;
+      --surface-2: #1b2437;
+      --text: #eef2ff;
+      --muted: #9aa6bd;
+      --border: #29344b;
+      --primary: #8b83ff;
+      --primary-dark: #a49dff;
+      --primary-soft: #242152;
+      --teal: #5eead4;
+      --teal-soft: #123b39;
+      --green: #6ee7a0;
+      --green-soft: #123524;
+      --red: #ff8d86;
+      --red-soft: #3a1919;
+      --amber: #fbbf24;
+      --amber-soft: #3a2a0c;
+      --shadow: 0 18px 45px rgba(0, 0, 0, .35);
+      --shadow-sm: 0 4px 16px rgba(0, 0, 0, .25);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% -5%, rgba(81, 70, 229, .14), transparent 30rem),
+        radial-gradient(circle at 100% 8%, rgba(15, 118, 110, .12), transparent 26rem),
+        var(--bg);
+      min-height: 100vh;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, select, input { font: inherit; }
+    button { cursor: pointer; }
+    button:disabled { cursor: not-allowed; opacity: .5; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { line-height: 1.12; letter-spacing: -.02em; }
+    .app-shell { max-width: 1180px; margin: 0 auto; padding: 26px 22px 60px; }
+    .site-header {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 8px 0 28px;
+    }
+    .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; color: inherit; }
+    .brand-logo {
+      width: 46px; height: 46px; border-radius: 15px; flex: 0 0 auto;
+      display: grid; place-items: center; color: #fff; font-weight: 800; letter-spacing: -.04em;
+      background: linear-gradient(135deg, #5146e5, #0f766e);
+      box-shadow: 0 10px 24px rgba(81, 70, 229, .28);
+    }
+    .brand strong { display: block; font-size: 15px; letter-spacing: -.01em; }
+    .brand span { display: block; color: var(--muted); font-size: 12.5px; }
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .icon-btn {
+      border: 1px solid var(--border); background: color-mix(in srgb, var(--surface) 82%, transparent);
+      color: var(--text); border-radius: 999px; padding: 10px 14px; font-size: 13px; font-weight: 650;
+      display: inline-flex; align-items: center; gap: 7px; box-shadow: var(--shadow-sm);
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+    }
+    .icon-btn:hover { transform: translateY(-1px); border-color: var(--primary); }
+    .view { display: none; animation: fadeUp .28s ease both; }
+    .view.active { display: block; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 7px; text-transform: uppercase;
+      letter-spacing: .12em; font-size: 11px; font-weight: 800; color: var(--primary);
+    }
+    .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 0 4px var(--primary-soft); }
+    .hero {
+      display: grid; grid-template-columns: 1.5fr .8fr; gap: 24px; align-items: stretch;
+      margin-bottom: 22px;
+    }
+    .hero-copy {
+      background: linear-gradient(150deg, color-mix(in srgb, var(--surface) 92%, transparent), color-mix(in srgb, var(--surface) 72%, transparent));
+      border: 1px solid var(--border); border-radius: calc(var(--radius) + 6px); padding: 38px 40px;
+      box-shadow: var(--shadow); position: relative; overflow: hidden;
+    }
+    .hero-copy::after {
+      content: ""; position: absolute; width: 300px; height: 300px; right: -140px; top: -160px;
+      background: radial-gradient(circle, rgba(81,70,229,.22), transparent 65%); pointer-events: none;
+    }
+    .hero-copy h1 { font-size: clamp(32px, 4.2vw, 52px); margin: 14px 0 16px; max-width: 720px; }
+    .gradient-text { background: linear-gradient(100deg, var(--primary), var(--teal)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-copy p { color: var(--muted); font-size: 15.5px; max-width: 640px; margin-bottom: 22px; }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px; padding: 7px 11px; border-radius: 999px;
+      font-size: 12px; font-weight: 700; border: 1px solid var(--border); color: var(--muted); background: var(--surface-2);
+    }
+    .pill.strong { color: var(--primary); border-color: color-mix(in srgb, var(--primary) 30%, var(--border)); background: var(--primary-soft); }
+    .hero-panel {
+      background: var(--surface); border: 1px solid var(--border); border-radius: calc(var(--radius) + 6px);
+      padding: 26px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between; gap: 18px;
+    }
+    .ring-wrap { display: flex; align-items: center; gap: 18px; }
+    .stat-ring {
+      --value: 0; width: 104px; height: 104px; border-radius: 50%; flex: 0 0 auto;
+      display: grid; place-items: center; position: relative;
+      background: conic-gradient(var(--primary) calc(var(--value) * 1%), var(--bg-soft) 0);
+    }
+    .stat-ring::before { content: ""; position: absolute; inset: 9px; border-radius: 50%; background: var(--surface); }
+    .stat-ring > div { position: relative; text-align: center; }
+    .stat-ring strong { display: block; font-size: 23px; letter-spacing: -.04em; line-height: 1; }
+    .stat-ring small { display: block; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-top: 5px; }
+    .ring-copy strong { display: block; font-size: 15px; }
+    .ring-copy span { display: block; color: var(--muted); font-size: 12.5px; margin-top: 3px; }
+    .mini-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .mini-stat { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 12px; }
+    .mini-stat strong { display: block; font-size: 20px; letter-spacing: -.03em; }
+    .mini-stat span { color: var(--muted); font-size: 11.5px; }
+    .mode-grid { display: grid; grid-template-columns: 1.1fr 1.25fr 1fr; gap: 16px; margin-bottom: 18px; }
+    .mode-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 14px;
+      position: relative; overflow: hidden;
+    }
+    .mode-card.featured { border-color: color-mix(in srgb, var(--primary) 40%, var(--border)); box-shadow: 0 16px 40px rgba(81,70,229,.15); }
+    .mode-card.featured::before { content: ""; position: absolute; inset: 0 0 auto; height: 4px; background: linear-gradient(90deg, var(--primary), var(--teal)); }
+    .card-icon {
+      width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center;
+      background: var(--primary-soft); color: var(--primary); font-size: 19px;
+    }
+    .mode-card:nth-child(2) .card-icon { background: var(--teal-soft); color: var(--teal); }
+    .mode-card:nth-child(3) .card-icon { background: var(--amber-soft); color: var(--amber); }
+    .mode-card h2 { font-size: 19px; margin: 0; }
+    .mode-card p { color: var(--muted); font-size: 13px; margin: 0; }
+    .mode-card .card-body { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+    .mode-card .btn { margin-top: auto; width: 100%; }
+    .topic-picker { display: flex; flex-wrap: wrap; gap: 6px; }
+    .topic-chip {
+      border: 1px solid var(--border); background: var(--surface-2); color: var(--muted);
+      border-radius: 999px; padding: 6px 9px; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;
+      transition: all .15s ease;
+    }
+    .topic-chip[aria-pressed="true"] { color: var(--primary); background: var(--primary-soft); border-color: color-mix(in srgb, var(--primary) 35%, var(--border)); }
+    .topic-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: .7; }
+    .practice-controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; }
+    .practice-controls select { width: 100%; min-width: 0; }
+    select {
+      width: 100%; border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
+      border-radius: 10px; padding: 9px 11px; font-size: 13px; outline: none;
+    }
+    select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+    .btn {
+      border: 0; border-radius: 12px; padding: 12px 16px; font-weight: 750; font-size: 13.5px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease; text-decoration: none;
+    }
+    .btn:hover:not(:disabled) { transform: translateY(-1px); }
+    .btn.primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; box-shadow: 0 8px 20px rgba(81,70,229,.24); }
+    .btn.teal { background: linear-gradient(135deg, #0f766e, #0d9488); color: #fff; box-shadow: 0 8px 20px rgba(15,118,110,.2); }
+    .btn.ghost { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+    .btn.ghost:hover:not(:disabled) { border-color: var(--primary); }
+    .btn.small { padding: 9px 12px; font-size: 12.5px; border-radius: 10px; }
+    .settings-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 22px 24px; box-shadow: var(--shadow-sm); margin-bottom: 18px;
+    }
+    .settings-card h3 { font-size: 15px; margin: 0 0 14px; }
+    .settings-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: end; }
+    .field label { display: block; font-size: 11.5px; font-weight: 750; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .06em; }
+    .switch-row { display: flex; align-items: center; gap: 9px; padding: 9px 11px; border: 1px solid var(--border); background: var(--surface-2); border-radius: 10px; min-height: 40px; }
+    .switch-row input { accent-color: var(--primary); width: 16px; height: 16px; }
+    .switch-row span { font-size: 12.5px; font-weight: 650; }
+    .hint { color: var(--muted); font-size: 12px; margin: 12px 0 0; }
+    .bank-info { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow-sm); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+    .section-head h2 { font-size: 20px; margin: 0; }
+    .section-head p { color: var(--muted); font-size: 12.5px; margin: 0; }
+    .topic-bars { display: grid; gap: 11px; }
+    .topic-bar { display: grid; grid-template-columns: 145px 1fr 38px; gap: 12px; align-items: center; font-size: 12.5px; }
+    .topic-bar .bar { height: 9px; border-radius: 99px; background: var(--bg-soft); overflow: hidden; }
+    .topic-bar .bar span { display: block; height: 100%; border-radius: 99px; }
+    .topic-bar strong { text-align: right; color: var(--muted); font-size: 12px; }
+
+    /* ---------- TEST ---------- */
+    .quiz-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 14px; flex-wrap: wrap; }
+    .quiz-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 6px 10px;
+      font-size: 11px; font-weight: 800; background: var(--primary-soft); color: var(--primary);
+      border: 1px solid color-mix(in srgb, var(--primary) 26%, var(--border));
+    }
+    .badge.ghost { background: var(--surface-2); color: var(--muted); border-color: var(--border); }
+    .timer { font-variant-numeric: tabular-nums; font-weight: 800; font-size: 13px; padding: 6px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); }
+    .timer.warning { color: var(--red); border-color: color-mix(in srgb, var(--red) 45%, var(--border)); background: var(--red-soft); }
+    .score-live { font-size: 12.5px; color: var(--muted); font-weight: 650; }
+    .score-live strong { color: var(--text); }
+    .progress-track { height: 8px; background: var(--bg-soft); border-radius: 99px; overflow: hidden; margin-bottom: 22px; }
+    .progress-track span { display: block; height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, var(--primary), var(--teal)); transition: width .3s ease; }
+    .quiz-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: calc(var(--radius) + 4px);
+      box-shadow: var(--shadow); padding: clamp(22px, 4vw, 42px); max-width: 900px; margin: 0 auto;
+    }
+    .question-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+    .q-counter { margin-left: auto; color: var(--muted); font-size: 12px; font-weight: 750; }
+    .quiz-card h2 { font-size: clamp(21px, 2.6vw, 31px); margin: 0 0 26px; letter-spacing: -.025em; }
+    .options { display: grid; gap: 11px; }
+    .option {
+      width: 100%; text-align: left; display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: center;
+      border: 1.5px solid var(--border); background: var(--surface-2); color: var(--text);
+      border-radius: 14px; padding: 14px 15px; font-size: 14px; line-height: 1.45;
+      transition: border-color .15s ease, background .15s ease, transform .15s ease;
+    }
+    .option:hover:not(:disabled) { border-color: var(--primary); transform: translateY(-1px); background: var(--surface); }
+    .option .letter {
+      width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center;
+      background: var(--surface); border: 1px solid var(--border); font-size: 12px; font-weight: 850; color: var(--muted);
+    }
+    .option.selected { border-color: var(--primary); background: var(--primary-soft); }
+    .option.selected .letter { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .option.correct { border-color: var(--green); background: var(--green-soft); }
+    .option.correct .letter { background: var(--green); color: #fff; border-color: var(--green); }
+    .option.wrong { border-color: var(--red); background: var(--red-soft); }
+    .option.wrong .letter { background: var(--red); color: #fff; border-color: var(--red); }
+    .option:disabled { cursor: default; opacity: 1; }
+    .option .mark { margin-left: auto; font-weight: 900; font-size: 15px; }
+    .feedback {
+      margin-top: 18px; border-radius: 14px; padding: 15px 17px; border: 1px solid var(--border);
+      background: var(--surface-2); animation: fadeUp .2s ease both;
+    }
+    .feedback.ok { border-color: color-mix(in srgb, var(--green) 38%, var(--border)); background: var(--green-soft); }
+    .feedback.bad { border-color: color-mix(in srgb, var(--red) 38%, var(--border)); background: var(--red-soft); }
+    .feedback strong { display: block; font-size: 13.5px; margin-bottom: 5px; }
+    .feedback p { margin: 0; font-size: 13px; color: var(--text); }
+    .feedback .answer-line { font-size: 12.5px; color: var(--muted); margin-bottom: 7px; }
+    .feedback .answer-line b { color: var(--text); }
+    .hidden { display: none !important; }
+    .quiz-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 24px; }
+    .quiz-actions .btn.primary { min-width: 150px; }
+    .kbd-hint { color: var(--muted); font-size: 11.5px; text-align: center; margin: 18px 0 0; }
+    kbd { font-family: inherit; border: 1px solid var(--border); background: var(--surface-2); border-bottom-width: 2px; border-radius: 5px; padding: 1px 5px; font-size: 10.5px; }
+
+    /* ---------- RESULTADOS ---------- */
+    .result-hero {
+      background: var(--surface); border: 1px solid var(--border); border-radius: calc(var(--radius) + 4px);
+      box-shadow: var(--shadow); padding: clamp(24px, 4vw, 40px); display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .result-hero h1 { font-size: clamp(28px, 4vw, 40px); margin: 8px 0 8px; }
+    .result-hero p { color: var(--muted); margin: 0; font-size: 14px; max-width: 660px; }
+    .result-score { text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
+    .result-score strong { font-size: clamp(46px, 7vw, 68px); line-height: .95; letter-spacing: -.06em; }
+    .result-score .out { color: var(--muted); font-size: 17px; font-weight: 750; margin-top: 5px; }
+    .result-score .pct { font-size: 12.5px; color: var(--muted); margin-top: 6px; font-weight: 650; }
+    .result-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+    .metric { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 15px 16px; box-shadow: var(--shadow-sm); }
+    .metric span { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; font-weight: 750; }
+    .metric strong { display: block; font-size: 24px; letter-spacing: -.04em; margin-top: 4px; }
+    .metric.good strong { color: var(--green); }
+    .metric.bad strong { color: var(--red); }
+    .breakdown-card, .review-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: var(--shadow-sm); padding: 24px; margin-bottom: 16px;
+    }
+    .breakdown-card h2, .review-card h2 { font-size: 19px; margin: 0 0 16px; }
+    .breakdown { display: grid; gap: 11px; }
+    .breakdown-row { display: grid; grid-template-columns: 170px 1fr 70px; gap: 12px; align-items: center; font-size: 12.5px; }
+    .breakdown-row .bar { height: 9px; background: var(--bg-soft); border-radius: 99px; overflow: hidden; display: flex; }
+    .breakdown-row .bar .ok { background: var(--green); height: 100%; }
+    .breakdown-row .bar .ko { background: var(--red); height: 100%; opacity: .65; }
+    .breakdown-row .nums { text-align: right; color: var(--muted); }
+    .review-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+    .review-head h2 { margin: 0; }
+    .filter-row { display: flex; gap: 6px; }
+    .filter-btn { border: 1px solid var(--border); background: var(--surface-2); color: var(--muted); border-radius: 999px; padding: 6px 11px; font-size: 11.5px; font-weight: 750; }
+    .filter-btn.active { background: var(--primary-soft); color: var(--primary); border-color: color-mix(in srgb, var(--primary) 35%, var(--border)); }
+    .review-list { display: grid; gap: 8px; }
+    .review-item { border: 1px solid var(--border); border-radius: 12px; background: var(--surface-2); overflow: hidden; }
+    .review-item summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 12px 14px; font-size: 13px; font-weight: 650; }
+    .review-item summary::-webkit-details-marker { display: none; }
+    .review-item summary .chev { margin-left: auto; color: var(--muted); transition: transform .2s ease; }
+    .review-item[open] summary .chev { transform: rotate(90deg); }
+    .review-item .status-dot { width: 23px; height: 23px; border-radius: 7px; display: grid; place-items: center; flex: 0 0 auto; font-size: 12px; font-weight: 900; }
+    .review-item.ok .status-dot { background: var(--green-soft); color: var(--green); }
+    .review-item.bad .status-dot { background: var(--red-soft); color: var(--red); }
+    .review-item.blank .status-dot { background: var(--amber-soft); color: var(--amber); }
+    .review-body { padding: 0 14px 15px 47px; font-size: 12.5px; color: var(--muted); }
+    .review-body .line { margin: 3px 0; }
+    .review-body .line b { color: var(--text); }
+    .review-body .exp { margin-top: 10px; padding: 10px 12px; border-radius: 9px; background: var(--surface); border: 1px solid var(--border); color: var(--text); }
+    .result-actions { display: flex; gap: 9px; flex-wrap: wrap; justify-content: center; padding: 10px 0 0; }
+
+    /* ---------- MODAL ---------- */
+    dialog {
+      border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text);
+      max-width: 900px; width: calc(100% - 32px); max-height: 86vh; padding: 0; box-shadow: var(--shadow);
+    }
+    dialog::backdrop { background: rgba(9, 14, 26, .55); backdrop-filter: blur(3px); }
+    .dialog-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--surface); z-index: 2; }
+    .dialog-head h2 { margin: 0; font-size: 20px; }
+    .dialog-body { padding: 20px 24px 28px; overflow-y: auto; }
+    .cheat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cheat-card { border: 1px solid var(--border); border-radius: 12px; background: var(--surface-2); padding: 14px 16px; }
+    .cheat-card h3 { font-size: 13.5px; margin: 0 0 8px; color: var(--primary); }
+    .cheat-card ul { margin: 0; padding-left: 18px; font-size: 12.5px; color: var(--muted); }
+    .cheat-card li { margin: 4px 0; }
+    .cheat-card b { color: var(--text); }
+    footer { color: var(--muted); font-size: 11.5px; text-align: center; padding-top: 28px; }
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-panel { flex-direction: row; align-items: center; }
+      .mode-grid { grid-template-columns: 1fr 1fr; }
+      .mode-card.featured { grid-column: span 2; }
+      .settings-grid { grid-template-columns: 1fr 1fr; }
+      .cheat-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 680px) {
+      .app-shell { padding: 16px 14px 44px; }
+      .brand span { display: none; }
+      .header-actions .icon-btn span { display: none; }
+      .hero-copy { padding: 26px 22px; }
+      .hero-panel { flex-direction: column; align-items: stretch; }
+      .mode-grid { grid-template-columns: 1fr; }
+      .mode-card.featured { grid-column: auto; }
+      .settings-grid { grid-template-columns: 1fr; }
+      .result-metrics { grid-template-columns: 1fr 1fr; }
+      .topic-bar { grid-template-columns: 104px 1fr 30px; }
+      .breakdown-row { grid-template-columns: 110px 1fr 60px; }
+      .quiz-actions { flex-direction: column-reverse; }
+      .quiz-actions .btn { width: 100%; }
+      .result-score { align-items: flex-start; text-align: left; }
+    }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+  <header class="site-header">
+    <a class="brand" href="#" id="brandHome">
+      <div class="brand-logo">AS</div>
+      <div>
+        <strong>Administración de Sistemas</strong>
+        <span>Test interactivo · Tema 1, Virtualización, Docker, AD y Clústers</span>
+      </div>
+    </a>
+    <div class="header-actions">
+      <button class="icon-btn" id="cheatBtn" type="button">📋 <span>Chuleta</span></button>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Cambiar tema">🌙</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= INICIO ================= -->
+    <section id="homeView" class="view active">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">Repaso intensivo para el examen</span>
+          <h1>Pon a prueba lo que sabes de <span class="gradient-text">sistemas inteligentes</span>.</h1>
+          <p>
+            Banco de <strong id="bankCount">0</strong> preguntas tipo test con 3 opciones, respuesta única y penalización proporcional.
+            Si fallas, verás el porqué al instante. Incluye teoría, casos de uso y las trampas típicas de cada tema.
+          </p>
+          <div class="hero-badges">
+            <span class="pill strong">🎯 40 preguntas en el simulacro</span>
+            <span class="pill">−0,5 por fallo (3 opciones)</span>
+            <span class="pill">Explicación de cada error</span>
+          </div>
+        </div>
+        <aside class="hero-panel">
+          <div class="ring-wrap">
+            <div class="stat-ring" id="accuracyRing" style="--value:0">
+              <div><strong id="accuracyValue">—</strong><small>precisión</small></div>
+            </div>
+            <div class="ring-copy">
+              <strong id="accuracyTitle">Aún sin datos</strong>
+              <span id="accuracySubtitle">Haz tu primer test para ver tu progreso.</span>
+            </div>
+          </div>
+          <div class="mini-stats">
+            <div class="mini-stat"><strong id="statBank">0</strong><span>preguntas en el banco</span></div>
+            <div class="mini-stat"><strong id="statFailed">0</strong><span>falladas para repasar</span></div>
+            <div class="mini-stat"><strong id="statAttempts">0</strong><span>tests completados</span></div>
+            <div class="mini-stat"><strong id="statAnswered">0</strong><span>preguntas respondidas</span></div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="mode-grid">
+        <article class="mode-card featured">
+          <div class="card-icon">🎯</div>
+          <div class="card-body">
+            <h2>Simulacro de examen</h2>
+            <p>40 preguntas con la proporción del examen real: Tema 1, virtualización y Docker, dominios/AD y clústers. Con cronómetro opcional de 45 minutos.</p>
+            <div class="pill" style="align-self:flex-start; line-height:1.55">Tema&nbsp;1&nbsp;·&nbsp;7 &nbsp;|&nbsp; Virtualización&nbsp;·&nbsp;11 &nbsp;|&nbsp; Docker&nbsp;·&nbsp;8 &nbsp;|&nbsp; AD&nbsp;·&nbsp;8 &nbsp;|&nbsp; Clústers&nbsp;·&nbsp;6</div>
+          </div>
+          <button class="btn primary" id="examBtn" type="button">Empezar simulacro →</button>
+        </article>
+
+        <article class="mode-card">
+          <div class="card-icon">🧩</div>
+          <div class="card-body">
+            <h2>Práctica por temas</h2>
+            <p>Elige los temas y el número de preguntas. Ideal para repasar justo lo que peor llevas.</p>
+            <div class="topic-picker" id="practiceTopics"></div>
+            <div class="practice-controls">
+              <select id="practiceCount" aria-label="Número de preguntas">
+                <option value="10">10 preguntas</option>
+                <option value="20" selected>20 preguntas</option>
+                <option value="30">30 preguntas</option>
+                <option value="40">40 preguntas</option>
+                <option value="all">Todas las disponibles</option>
+              </select>
+              <button class="btn teal small" id="practiceBtn" type="button">Practicar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="mode-card">
+          <div class="card-icon">🔁</div>
+          <div class="card-body">
+            <h2>Repaso de fallos</h2>
+            <p>Vuelve a las preguntas que has fallado. Se guardan en tu navegador para que puedas insistir hasta dominarlas.</p>
+            <div class="pill" id="failedPill" style="align-self:flex-start">0 preguntas pendientes</div>
+          </div>
+          <button class="btn ghost" id="reviewBtn" type="button">Repasar fallos</button>
+        </article>
+      </div>
+
+      <section class="settings-card">
+        <h3>⚙️ Ajustes de la prueba</h3>
+        <div class="settings-grid">
+          <div class="field">
+            <label for="penaltySelect">Penalización por fallo</label>
+            <select id="penaltySelect">
+              <option value="0">Sin penalización (0)</option>
+              <option value="0.33">−0,33 por fallo</option>
+              <option value="0.5" selected>−0,5 por fallo (recomendado)</option>
+              <option value="1">−1 por fallo</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="feedbackSelect">Momento de la corrección</label>
+            <select id="feedbackSelect">
+              <option value="immediate" selected>Inmediata (para estudiar)</option>
+              <option value="end">Al final (simulacro estricto)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Cronómetro</label>
+            <label class="switch-row" for="timerToggle">
+              <input type="checkbox" id="timerToggle" checked>
+              <span>45 min en el simulacro</span>
+            </label>
+          </div>
+        </div>
+        <p class="hint">La penalización proporcional con 3 opciones es 1/(3−1) = 0,5 por fallo. Las preguntas en blanco no restan. La nota es orientativa: sirve para detectar puntos débiles, no para predecir la nota oficial.</p>
+      </section>
+
+      <section class="bank-info">
+        <div class="section-head">
+          <div>
+            <h2>Contenido del banco</h2>
+            <p>Preguntas extraídas de los cuatro PDFs, con teoría y casos de uso.</p>
+          </div>
+          <button class="btn ghost small" id="resetStatsBtn" type="button">Borrar progreso</button>
+        </div>
+        <div class="topic-bars" id="topicOverview"></div>
+      </section>
+    </section>
+
+    <!-- ================= TEST ================= -->
+    <section id="quizView" class="view">
+      <div class="quiz-top">
+        <button class="btn ghost small" id="quitBtn" type="button">← Salir</button>
+        <div class="quiz-meta">
+          <span class="badge" id="modeBadge">Simulacro</span>
+          <span class="timer hidden" id="timerDisplay">45:00</span>
+        </div>
+        <div class="score-live" id="liveScore">Respondidas: 0</div>
+      </div>
+      <div class="progress-track"><span id="progressBar"></span></div>
+      <article class="quiz-card">
+        <div class="question-head">
+          <span class="badge" id="qTopic">Tema</span>
+          <span class="badge ghost" id="qType">Teoría</span>
+          <span class="q-counter" id="qCounter">Pregunta 1 de 40</span>
+        </div>
+        <h2 id="questionText">Cargando…</h2>
+        <div class="options" id="options"></div>
+        <div class="feedback hidden" id="feedback" role="status" aria-live="polite"></div>
+        <div class="quiz-actions">
+          <button class="btn ghost" id="skipBtn" type="button">Saltar</button>
+          <button class="btn primary" id="nextBtn" type="button" disabled>Siguiente →</button>
+        </div>
+        <p class="kbd-hint">Atajos: <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> para responder · <kbd>Enter</kbd> para siguiente</p>
+      </article>
+    </section>
+
+    <!-- ================= RESULTADOS ================= -->
+    <section id="resultView" class="view">
+      <div class="result-hero">
+        <div>
+          <span class="eyebrow">Resultado del test</span>
+          <h1 id="resultTitle">Resultado</h1>
+          <p id="resultSubtitle"></p>
+        </div>
+        <div class="result-score">
+          <strong id="resultScore">0</strong>
+          <span class="out" id="resultOutOf">/ 40</span>
+          <span class="pct" id="resultPct"></span>
+        </div>
+      </div>
+      <div class="result-metrics" id="resultMetrics"></div>
+      <section class="breakdown-card">
+        <h2>Resultado por tema</h2>
+        <div class="breakdown" id="topicBreakdown"></div>
+      </section>
+      <section class="review-card">
+        <div class="review-head">
+          <h2>Revisión y explicaciones</h2>
+          <div class="filter-row">
+            <button class="filter-btn active" data-filter="all" type="button">Todas</button>
+            <button class="filter-btn" data-filter="wrong" type="button">Solo fallos</button>
+          </div>
+        </div>
+        <div class="review-list" id="reviewList"></div>
+      </section>
+      <div class="result-actions">
+        <button class="btn primary" id="retryFailedBtn" type="button">Repasar fallos</button>
+        <button class="btn teal" id="newExamBtn" type="button">Nuevo simulacro</button>
+        <button class="btn ghost" id="homeBtn" type="button">Volver al inicio</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Basado en los apuntes de Administración de Sistemas · UCAM. Material de estudio personal.
+  </footer>
+</div>
+
+<dialog id="cheatDialog">
+  <div class="dialog-head">
+    <h2>📋 Chuleta rápida</h2>
+    <button class="btn ghost small" id="closeCheatBtn" type="button">Cerrar</button>
+  </div>
+  <div class="dialog-body">
+    <div class="cheat-grid">
+      <article class="cheat-card">
+        <h3>Tema 1 · Sistemas de Información</h3>
+        <ul>
+          <li><b>SI:</b> captura, almacena y transforma datos para entregar información oportuna y precisa.</li>
+          <li><b>Dato:</b> hecho sin procesar. <b>Información:</b> dato con relevancia. <b>Conocimiento:</b> experiencia, mente humana.</li>
+          <li><b>9 características:</b> exactitud, comprensión, completitud, economicidad, confianza, relevancia, nivel de detalle, oportunidad, verificabilidad.</li>
+          <li><b>3 dimensiones:</b> humana, tecnológica, organizativa.</li>
+          <li><b>CPD:</b> equipamiento + energía redundante + control ambiental + seguridad.</li>
+          <li><b>Evolución:</b> mainframes → minis → cliente-servidor → grid (90s) → clústers → virtualización → nube → CPD modular (2007).</li>
+          <li><b>DevOps (2008):</b> acerca desarrollo y sistemas; automatización; dev = producción.</li>
+        </ul>
+      </article>
+      <article class="cheat-card">
+        <h3>Tema 2 · Virtualización</h3>
+        <ul>
+          <li><b>VM:</b> hardware simulado + SO + apps, aislada. <b>Hipervisor:</b> desvincula VM del host y asigna recursos.</li>
+          <li><b>Tipo 1:</b> sobre hardware (ESXi). <b>Tipo 2:</b> sobre SO anfitrión (Workstation, VirtualBox).</li>
+          <li><b>Tipos:</b> plataforma (completa, paravirtualización, SO), recursos (swap, VPN), aplicaciones (Wine, JVM, CLR), escritorio (Citrix).</li>
+          <li><b>Ventajas:</b> consolidación, administración simple, HA, rendimiento/redundancia, coste, energía.</li>
+          <li><b>Inconvenientes:</b> pérdida de rendimiento, monitorizar el host, hardware no soportado, mala densidad, host = punto único de fallo.</li>
+          <li><b>Ficheros VMware:</b> .vmx configuración, .nvram BIOS, .vmdk disco, .vmsd snapshots, .vmsn estado.</li>
+          <li><b>Hiperconvergencia III:</b> local + SDS, sin SAN; flash para caliente, HDD para frío.</li>
+        </ul>
+      </article>
+      <article class="cheat-card">
+        <h3>Docker</h3>
+        <ul>
+          <li><b>Imagen:</b> plantilla de solo lectura. <b>Contenedor:</b> instancia ejecutable. Al ejecutar una imagen nace un contenedor.</li>
+          <li><b>Dockerfile:</b> FROM al inicio, CMD al final; cada instrucción = una capa; solo se reconstruyen las cambiadas.</li>
+          <li><b>Build:</b> <code>docker image build -t nombre .</code></li>
+          <li><b>Registro:</b> Docker Hub por defecto; <code>pull</code> descarga, <code>push</code> sube.</li>
+          <li><b>Persistencia:</b> volúmenes (fuera del UFS) y bind mounts (directorio del host). Los bind mounts no van en el Dockerfile.</li>
+          <li><b>Ventajas:</b> CI/CD, portabilidad, entornos consistentes, más cargas por hardware, ligero.</li>
+          <li><b>Ojo:</b> contenedor ≠ mini VM; comparte kernel y es un proceso.</li>
+        </ul>
+      </article>
+      <article class="cheat-card">
+        <h3>Tema 3 · Dominios y AD</h3>
+        <ul>
+          <li><b>Grupo de trabajo:</b> BD local por equipo, descentralizado, sin Windows Server; problema: sincronizar usuarios.</li>
+          <li><b>AD:</b> servicio de directorio de Microsoft basado en X.500; objetos + GPO.</li>
+          <li><b>Jerarquía:</b> OU ⊂ dominio ⊂ árbol ⊂ bosque. Dominio = frontera de seguridad; árbol = namespace contiguo; bosque = árboles con confianza.</li>
+          <li><b>Nombres:</b> DN (ruta completa), RDN (sin dominio/OU), UPN (usuario@dominio), SID (cambia de dominio), GUID (nunca cambia), NetBIOS (compatibilidad).</li>
+          <li><b>CD:</b> autentica y replica. <b>RODC:</b> solo lectura, sucursales, no tolerancia a fallos.</li>
+          <li><b>GPO:</b> máquina al arrancar, usuario al logon; refresco 90 ± 30 min; orden Sitio > Dominio > OU > Grupo > Equipo > Usuario; gana la más específica.</li>
+          <li><b>PowerShell:</b> orientado a objetos; MONAD 2003 → PowerShell 2006 → Core 2016; alias dir/ls/gci.</li>
+        </ul>
+      </article>
+      <article class="cheat-card" style="grid-column: 1 / -1">
+        <h3>Clústers · tabla de bolsillo</h3>
+        <ul>
+          <li><b>HPC:</b> minimiza latencia/TTS; tareas fuertemente acopladas; MPI, InfiniBand, Slurm/PBS, GPU/FPGA.</li>
+          <li><b>HTC:</b> maximiza throughput; tareas independientes; HTCondor, checkpointing, Grid Engine; no necesita red de ultrabaja latencia.</li>
+          <li><b>HA:</b> continuidad y failover; RTO/RPO ≈ 0; activo-pasivo vs activo-activo; Pacemaker (recursos) + Corosync (heartbeat); failback.</li>
+          <li><b>LB:</b> reparte tráfico entrante; escalado horizontal; Weighted Round-Robin (estático) vs dinámicos; HAProxy, NGINX Plus.</li>
+          <li><b>Almacenamiento:</b> SDS; Ceph (S3, RBD, CephFS), GlusterFS (hasta 16 EB, mal rendimiento de metadatos); elegir por perfil de E/S.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</dialog>
+
+<script src="questions-t1.js"></script>
+<script src="questions-t2.js"></script>
+<script src="questions-docker.js"></script>
+<script src="questions-t3.js"></script>
+<script src="questions-clusters.js"></script>
+<script src="questions.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
