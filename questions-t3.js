@@ -214,7 +214,7 @@ const BANK_T3 = [
       "CN=Gema Escrivá, DC=Usuarios, OU=actividad, OU=ejemploSOR, OU=com"
     ],
     c: 0,
-    e: "El nombre completo o distinguido (DN) incluye la ruta jerárquica: CN del objeto, OU contenedora y los DC del dominio. La opción con @ es el UPN, y el nombre suelto es el nombre completo relativo (RDN)."
+    e: "El nombre completo o distinguido (DN) incluye la ruta jerárquica en orden: CN del objeto, OU contenedora y los DC del dominio. Invertir CN y OU o usar OU para los componentes del dominio no produce un DN válido."
   },
   {
     id: "t3-21", t: "T3", k: "Teoría",

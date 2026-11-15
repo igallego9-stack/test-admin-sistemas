@@ -93,7 +93,7 @@ const BANK_CLUSTERS = [
     q: "¿Cuál es la tecnología líder para gestionar cargas HTC?",
     o: ["HTCondor (HTCSS)", "Slurm con MPI", "Pacemaker con Corosync"],
     c: 0,
-    e: "HTCondor (HTCSS) está diseñado para automatizar y gestionar cargas de alto throughput, incluso con recursos dispersos. Pacemaker es de HA y HAProxy de balanceo."
+    e: "HTCondor (HTCSS) está diseñado para automatizar y gestionar cargas de alto throughput, incluso con recursos dispersos. Slurm con MPI se orienta a HPC y Pacemaker con Corosync a alta disponibilidad."
   },
   {
     id: "cl-10", t: "CLUSTERS", k: "Teoría",
