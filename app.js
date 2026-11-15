@@ -294,10 +294,13 @@
   function renderQuestion() {
     const q = quiz.questions[quiz.index];
     const meta = topicMeta(q.t);
-    $("#qTopic").textContent = meta.short;
+    $("#qTopic").textContent = meta.label;
     $("#qTopic").style.color = meta.color;
     $("#qTopic").style.borderColor = meta.color + "66";
     $("#qTopic").style.background = meta.color + "16";
+    const subtopic = $("#qSubtopic");
+    subtopic.textContent = q.s || "";
+    subtopic.classList.toggle("hidden", !q.s);
     $("#qType").textContent = q.k || "Teoría";
     $("#qCounter").textContent = `Pregunta ${quiz.index + 1} de ${quiz.questions.length}`;
     $("#questionText").textContent = q.q;
@@ -613,6 +616,7 @@
           <span class="chev">›</span>
         </summary>
         <div class="review-body">
+          <div class="line"><b>Tema:</b> ${esc(meta.label)}${q.s ? ` · ${esc(q.s)}` : ""}</div>
           <div class="line"><b>Estado:</b> ${statusLabel}</div>
           <div class="line"><b>Tu respuesta:</b> ${yourAnswer}</div>
           <div class="line"><b>Correcta:</b> ${correctAnswer}</div>

@@ -5,8 +5,8 @@ const BANK_DOCKER = [
     q: "¿Qué es Docker?",
     o: [
       "Un proyecto de software libre que sistematiza el establecimiento de aplicaciones basadas en contenedores.",
-      "Un hipervisor de tipo 1 que sustituye a VMware ESXi.",
-      "Un sistema operativo Linux con kernel propio."
+      "Un hipervisor de tipo 1 que sustituye a VMware ESXi y ejecuta sistemas operativos completos.",
+      "Un formato de imagen de disco que contiene un SO completo y sus controladores."
     ],
     c: 0,
     e: "Docker es un proyecto de software libre que sistematiza las aplicaciones basadas en contenedores y añade una capa de abstracción y automatización de la virtualización de aplicaciones en múltiples SO."
@@ -16,8 +16,8 @@ const BANK_DOCKER = [
     q: "¿Qué hace el daemon de Docker?",
     o: [
       "Crea y administra objetos Docker como imágenes, contenedores, redes y volúmenes.",
-      "Es la interfaz gráfica del usuario.",
-      "Es un registro público de imágenes."
+      "Es la interfaz de línea de comandos que interpreta las órdenes del usuario.",
+      "Es el registro público donde se almacenan y comparten las imágenes."
     ],
     c: 0,
     e: "El daemon es el que hace el trabajo pesado: construir, ejecutar y distribuir contenedores, además de crear y administrar imágenes, redes y volúmenes. El cliente se comunica con él mediante la API."
@@ -27,8 +27,8 @@ const BANK_DOCKER = [
     q: "¿Cómo se comunican el cliente y el daemon de Docker?",
     o: [
       "Mediante una API REST, a través de sockets UNIX o de una interfaz de red.",
-      "Únicamente mediante USB.",
-      "Solo mediante FTP."
+      "Únicamente mediante USB o conexión serie.",
+      "Solo mediante FTP o SFTP."
     ],
     c: 0,
     e: "Cliente y daemon pueden ejecutarse en el mismo sistema o en sistemas distintos. Se comunican con una API REST a través de sockets UNIX o de una interfaz de red."
@@ -38,8 +38,8 @@ const BANK_DOCKER = [
     q: "¿Qué es Docker Hub?",
     o: [
       "Un registro público de imágenes que cualquiera puede usar y que Docker consulta por defecto.",
-      "El hipervisor que ejecuta los contenedores.",
-      "Un tipo de Dockerfile."
+      "El hipervisor que ejecuta los contenedores y asigna sus recursos.",
+      "Un tipo de Dockerfile que se ejecuta al construir la imagen."
     ],
     c: 0,
     e: "Un registro almacena imágenes. Docker Hub es el registro público por defecto; también se puede ejecutar un registro privado. Docker está configurado para buscar imágenes allí de manera predeterminada."
@@ -49,8 +49,8 @@ const BANK_DOCKER = [
     q: "¿Qué hace el comando docker pull?",
     o: [
       "Descarga una imagen desde el registro configurado.",
-      "Sube una imagen al registro.",
-      "Elimina un contenedor en ejecución."
+      "Sube una imagen al registro configurado.",
+      "Descarga un contenedor ya creado, pero no la imagen."
     ],
     c: 0,
     e: "docker pull descarga las imágenes requeridas desde el registro configurado. docker push hace lo contrario: inserta una imagen en el registro."
@@ -60,8 +60,8 @@ const BANK_DOCKER = [
     q: "¿Qué hace el comando docker push?",
     o: [
       "Sube una imagen al registro configurado.",
-      "Descarga una imagen del registro.",
-      "Lista los volúmenes existentes."
+      "Descarga una imagen del registro configurado.",
+      "Publica un contenedor en ejecución en el registro."
     ],
     c: 0,
     e: "docker push inserta la imagen en el registro configurado. Es el complemento de docker pull, que la descarga."
@@ -71,8 +71,8 @@ const BANK_DOCKER = [
     q: "¿Qué es una imagen Docker?",
     o: [
       "Una plantilla de solo lectura con instrucciones para crear un contenedor.",
-      "Una instancia en ejecución de un contenedor.",
-      "Un contenedor que ya se ha detenido."
+      "Una instancia en ejecución de un contenedor, con su propia configuración.",
+      "Un volumen de solo lectura que almacena los datos persistentes del contenedor."
     ],
     c: 0,
     e: "La imagen es una plantilla de solo lectura que incluye todo lo necesario para ejecutar una aplicación. Normalmente se basa en otra imagen con personalizaciones adicionales."
@@ -83,7 +83,7 @@ const BANK_DOCKER = [
     o: [
       "Múltiples contenedores.",
       "Solo uno, y hay que borrarlo para crear otro.",
-      "Ninguno: la imagen solo se almacena."
+      "Uno por cada capa del Dockerfile, como máximo."
     ],
     c: 0,
     e: "Con una imagen se pueden crear múltiples contenedores. Cada contenedor es una instancia ejecutable de esa imagen, con su propia configuración."
@@ -93,8 +93,8 @@ const BANK_DOCKER = [
     q: "¿Qué es un contenedor Docker?",
     o: [
       "Una instancia ejecutable de una imagen.",
-      "Una plantilla de solo lectura.",
-      "Un registro privado de imágenes."
+      "Una plantilla de solo lectura con instrucciones para crear imágenes.",
+      "Un disco virtual que contiene el SO completo y las aplicaciones."
     ],
     c: 0,
     e: "El contenedor es una instancia ejecutable de una imagen. Se define por su imagen y por las opciones de configuración que se le proporcionan al crearlo o iniciarlo."
@@ -104,8 +104,8 @@ const BANK_DOCKER = [
     q: "¿Qué ocurre cuando se ejecuta una imagen Docker?",
     o: [
       "Se convierte automáticamente en un contenedor.",
-      "Se convierte en otra imagen.",
-      "No se puede ejecutar una imagen directamente."
+      "Se convierte en otra imagen con una capa adicional.",
+      "Se copia en un volumen persistente y se ejecuta desde allí."
     ],
     c: 0,
     e: "En cuanto se ejecuta una imagen, automáticamente se convierte en un contenedor. La imagen es la plantilla; el contenedor es la instancia en ejecución."
@@ -115,8 +115,8 @@ const BANK_DOCKER = [
     q: "En un Dockerfile, ¿qué crea cada instrucción?",
     o: [
       "Una capa en la imagen.",
-      "Un contenedor nuevo.",
-      "Un volumen persistente."
+      "Un contenedor nuevo que se ejecuta al construir la imagen.",
+      "Un volumen persistente asociado a la instrucción."
     ],
     c: 0,
     e: "Cada instrucción de un Dockerfile crea una capa en la imagen. Cuando se cambia el Dockerfile y se reconstruye, solo se reconstruyen las capas que han cambiado."
@@ -126,11 +126,11 @@ const BANK_DOCKER = [
     q: "Al reconstruir una imagen tras modificar el Dockerfile, ¿qué capas se reconstruyen?",
     o: [
       "Solo las capas que han cambiado.",
-      "Siempre todas, desde cero.",
-      "Ninguna: hay que crear una imagen nueva manualmente."
+      "Siempre todas, desde cero, para garantizar la consistencia.",
+      "Solo la capa modificada, reutilizando también las posteriores."
     ],
     c: 0,
-    e: "Docker reutiliza las capas no modificadas y solo reconstruye las que han cambiado. Esto es parte de lo que hace que las imágenes sean ligeras, pequeñas y rápidas."
+    e: "Docker reutiliza las capas no modificadas y solo reconstruye las que han cambiado, junto con las posteriores que dependen de ellas. Esto es parte de lo que hace que las imágenes sean ligeras, pequeñas y rápidas."
   },
   {
     id: "dk-13", t: "DOCKER", k: "Teoría",
@@ -138,7 +138,7 @@ const BANK_DOCKER = [
     o: [
       "Empieza con FROM y termina con CMD.",
       "Empieza con CMD y termina con FROM.",
-      "No tiene un orden establecido."
+      "Empieza con RUN y termina con EXPOSE."
     ],
     c: 0,
     e: "Un Dockerfile parte siempre de una línea inicial FROM y un comando final CMD. FROM indica la imagen base; CMD, el comando que se ejecuta en el contenedor."
@@ -149,7 +149,7 @@ const BANK_DOCKER = [
     o: [
       "docker image build -t nombreimagen directorio",
       "docker run build nombreimagen",
-      "docker pull build nombreimagen"
+      "docker container build -t nombreimagen ."
     ],
     c: 0,
     e: "Para generar una imagen se usa docker image build -t <nombreimagen> <directorio-Dockerfile>. docker run ejecuta contenedores y docker pull descarga imágenes."
@@ -160,7 +160,7 @@ const BANK_DOCKER = [
     o: [
       "En una localización especial fuera del sistema de ficheros del contenedor (UFS).",
       "Dentro del contenedor, y se borran con él.",
-      "Solo en la imagen original."
+      "En la memoria RAM del host, mientras el contenedor está en ejecución."
     ],
     c: 0,
     e: "Los volúmenes son localizaciones especiales fuera del UFS del contenedor para almacenar datos persistentes. Deben borrarse manualmente y pueden nombrarse para identificarlos."
@@ -171,7 +171,7 @@ const BANK_DOCKER = [
     o: [
       "Un mapeo de un fichero o directorio del host dentro de un fichero o directorio del contenedor.",
       "Un volumen gestionado por Docker fuera del host.",
-      "Una instrucción obligatoria del Dockerfile."
+      "Una copia de la imagen que se monta en el contenedor al arrancar."
     ],
     c: 0,
     e: "El bind mount monta un directorio local de la máquina dentro del contenedor. Son dos localizaciones apuntando al mismo fichero; no es un volumen gestionado por Docker."
@@ -181,18 +181,18 @@ const BANK_DOCKER = [
     q: "¿Se puede especificar un bind mount en el Dockerfile?",
     o: [
       "No; se especifica como parámetro del comando container run.",
-      "Sí, con la instrucción FROM.",
-      "Sí, siempre con CMD."
+      "Sí, con la instrucción VOLUME.",
+      "Sí, con la instrucción COPY."
     ],
     c: 0,
-    e: "Los bind mounts no se pueden especificar en el Dockerfile: se indican como parámetro del comando container run, con -v <pathEnHost:pathEnContenedor>. Los volúmenes también se asocian al ejecutar el contenedor."
+    e: "Los bind mounts no se pueden especificar en el Dockerfile: se indican como parámetro del comando container run, con -v <pathEnHost:pathEnContenedor>. VOLUME declara un volumen, no un bind mount."
   },
   {
     id: "dk-18", t: "DOCKER", k: "Teoría",
     q: "¿Qué comando lista los volúmenes existentes?",
-    o: ["docker volume ls", "docker image ls", "docker container ls"],
+    o: ["docker volume ls", "docker volume inspect", "docker system df"],
     c: 0,
-    e: "docker volume ls lista los volúmenes. docker image ls lista imágenes y docker container ls lista contenedores."
+    e: "docker volume ls lista los volúmenes. docker volume inspect muestra los detalles de un volumen concreto y docker system df resume el uso de disco."
   },
   {
     id: "dk-19", t: "DOCKER", k: "Caso práctico",
@@ -200,7 +200,7 @@ const BANK_DOCKER = [
     o: [
       "Un volumen nombrado mysql-db montado en la ruta /var/lib/mysql del contenedor.",
       "Un bind mount de la carpeta /var/lib/mysql del host.",
-      "La publicación del puerto 3306."
+      "Un volumen anónimo creado en /var/lib/mysql del host."
     ],
     c: 0,
     e: "La sintaxis -v <nombreVolumen>:<rutaContenedor> asocia un volumen nombrado a una ruta del contenedor. Un bind mount usaría una ruta del host antes de los dos puntos."
@@ -211,7 +211,7 @@ const BANK_DOCKER = [
     o: [
       "Se pierden, porque los contenedores son efímeros.",
       "Se guardan automáticamente en la imagen original.",
-      "Se guardan siempre en un volumen sin configurarlo."
+      "Se conservan en una capa temporal y se aplican al volver a arrancar."
     ],
     c: 0,
     e: "Los contenedores son normalmente inmutables y efímeros: los cambios se conservan mientras se arrancan o paran, pero al borrar el contenedor se pierden. Para persistir datos se usan volúmenes o bind mounts."
@@ -221,8 +221,8 @@ const BANK_DOCKER = [
     q: "¿Qué ventaja de Docker se relaciona con CI/CD?",
     o: [
       "Los contenedores son excelentes para integración continua y entrega continua.",
-      "Docker solo sirve para desarrollo local.",
-      "Docker impide automatizar los despliegues."
+      "Docker solo sirve para desarrollo local y no se usa en producción.",
+      "Docker ralentiza la integración continua porque cada imagen se construye a mano."
     ],
     c: 0,
     e: "Docker ofrece entrega rápida y consistente: los contenedores son excelentes para integración continua y flujos de entrega continua (CI/CD), y permiten entornos estandarizados."
@@ -232,8 +232,8 @@ const BANK_DOCKER = [
     q: "¿Qué significa que Docker permite cargas de trabajo altamente portátiles?",
     o: [
       "Que pueden ejecutarse en el portátil, en máquinas físicas o virtuales del centro de datos, en la nube o en una combinación.",
-      "Que solo funcionan en Linux.",
-      "Que solo funcionan en un servidor físico concreto."
+      "Que solo funcionan en Linux, pero en cualquier distribución.",
+      "Que la imagen incluye el kernel y los controladores de cada máquina."
     ],
     c: 0,
     e: "Los contenedores Docker pueden ejecutarse en el portátil del desarrollador, en máquinas físicas o virtuales del centro de datos, en proveedores cloud o en combinación. Esa portabilidad es una ventaja clave."
@@ -244,7 +244,7 @@ const BANK_DOCKER = [
     o: [
       "Porque es ligero y rápido, al compartir el kernel y no necesitar una VM completa por aplicación.",
       "Porque requiere una máquina virtual por cada contenedor.",
-      "Porque solo funciona en mainframes."
+      "Porque cada contenedor reserva un bloque de CPU y RAM exclusivo."
     ],
     c: 0,
     e: "Docker es ligero y rápido y ofrece una alternativa rentable a las VM basadas en hipervisor. Al compartir kernel se logra alta densidad: más cargas de trabajo con menos recursos."
@@ -253,9 +253,9 @@ const BANK_DOCKER = [
     id: "dk-24", t: "DOCKER", k: "Teoría",
     q: "¿Cuál de las siguientes NO es una ventaja de Docker?",
     o: [
-      "Proporcionar el mismo aislamiento completo de hardware que una máquina virtual.",
-      "Entrega rápida y consistente de aplicaciones.",
-      "Portabilidad y escalado de cargas de trabajo."
+      "Proporcionar el mismo aislamiento de hardware que una máquina virtual con su propio kernel.",
+      "Estandarizar el entorno entre desarrollo y producción.",
+      "Permitir alta densidad de cargas en el mismo hardware."
     ],
     c: 0,
     e: "Los contenedores comparten el kernel del host, por lo que su aislamiento no es equivalente al de una VM con su propio SO y hardware simulado. Las otras dos sí son ventajas de Docker."
@@ -266,7 +266,7 @@ const BANK_DOCKER = [
     o: [
       "Entornos estandarizados y consistentes: el contenedor es el mismo en desarrollo, pruebas y producción.",
       "Mayor aislamiento de hardware que una VM.",
-      "La sustitución del sistema operativo anfitrión."
+      "La posibilidad de ejecutar cada servicio con su propio kernel."
     ],
     c: 0,
     e: "Docker empaqueta la aplicación y sus dependencias en una imagen, de modo que el entorno es consistente. Eso reduce los fallos por diferencias entre desarrollo y producción."
@@ -276,8 +276,8 @@ const BANK_DOCKER = [
     q: "¿Qué comparación usa el tema para explicar VM frente a contenedor?",
     o: [
       "La VM es como un chalet con sus propias instalaciones; el contenedor, como un apartamento que comparte infraestructura.",
-      "La VM es un apartamento y el contenedor un chalet.",
-      "Ambos son chalets independientes."
+      "La VM comparte la infraestructura y el contenedor tiene instalaciones propias.",
+      "Ambos comparten la misma infraestructura, pero el contenedor incluye un SO completo."
     ],
     c: 0,
     e: "La analogía del tema: las VM son chalets con calefacción, tuberías y aire acondicionado propios; los contenedores son apartamentos que comparten partes de la infraestructura. Ilustra el mayor peso de la VM."
@@ -288,7 +288,7 @@ const BANK_DOCKER = [
     o: [
       "Que el contenedor estará escuchando en el puerto 8080 en tiempo de ejecución.",
       "Que se copie el puerto 8080 al host.",
-      "Que se abra el puerto 8080 en el cortafuegos del host."
+      "Que el puerto 8080 quede reservado y no pueda usarse."
     ],
     c: 0,
     e: "EXPOSE documenta el puerto en el que el contenedor escuchará en ejecución. No publica el puerto en el host por sí sola; para eso se usa -p al ejecutar el contenedor."
@@ -299,7 +299,7 @@ const BANK_DOCKER = [
     o: [
       "docker container run y docker run.",
       "docker image run y docker container build.",
-      "docker push run y docker pull run."
+      "docker run container y docker build image."
     ],
     c: 0,
     e: "Docker admite la forma con comando de gestión y subcomando (docker container run) y la forma abreviada (docker run). Para ver los comandos está docker --help."

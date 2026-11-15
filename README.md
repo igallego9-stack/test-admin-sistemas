@@ -10,14 +10,16 @@ No hace falta cuenta de GitHub, ni descargar archivos, ni instalar nada. Se abre
 
 ## Contenido
 
-- **168 preguntas** tipo test con 3 opciones y una única respuesta correcta.
+- **223 preguntas** tipo test con 3 opciones y una única respuesta correcta.
 - Temas incluidos:
   - Tema 1: Sistemas de Información.
   - Tema 2: Virtualización (ventajas, desventajas, hipervisores y tipos).
   - Docker: imágenes, contenedores, volúmenes, redes y casos de uso.
   - Dominios, Active Directory, GPO y PowerShell.
+  - **Ampliación de AD**: bloques y dominios, presentación de AD, controladores de dominio, niveles funcionales, replicación de la base de datos y actualización de GPO.
   - Clústers: alta disponibilidad, balanceo de carga, HPC y almacenamiento distribuido.
-- **Simulacro de 40 preguntas** con una distribución orientativa del examen real.
+- **Simulacro de 40 preguntas** con una distribución orientativa del examen real: Tema 1 · 6, Virtualización · 9, Docker · 7, Dominios/AD · 7, Ampliación de AD · 6 y Clústers · 5.
+- Cada pregunta muestra el **tema** al que pertenece y, en la ampliación de AD, también el **subtema** concreto.
 - **Práctica por temas** con selector de número de preguntas.
 - **Repaso de fallos** guardado en el navegador.
 - Corrección inmediata con explicación breve de cada error.
@@ -58,6 +60,7 @@ Puedes compartir ese enlace con tus compañeros.
 | `questions-t2.js` | Preguntas de virtualización |
 | `questions-docker.js` | Preguntas de Docker |
 | `questions-t3.js` | Preguntas de dominios, AD, GPO y PowerShell |
+| `questions-adamp.js` | Preguntas de ampliación de AD con subtemas |
 | `questions-clusters.js` | Preguntas de clústers |
 
 ## Aviso

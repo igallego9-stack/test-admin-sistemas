@@ -365,7 +365,7 @@
       <div class="brand-logo">AS</div>
       <div>
         <strong>Administración de Sistemas</strong>
-        <span>Test interactivo · Tema 1, Virtualización, Docker, AD y Clústers</span>
+        <span>Test interactivo · Tema 1, Virtualización, Docker, AD (ampliación) y Clústers</span>
       </div>
     </a>
     <div class="header-actions">
@@ -415,8 +415,8 @@
           <div class="card-icon">🎯</div>
           <div class="card-body">
             <h2>Simulacro de examen</h2>
-            <p>40 preguntas con la proporción del examen real: Tema 1, virtualización y Docker, dominios/AD y clústers. Con cronómetro opcional de 45 minutos.</p>
-            <div class="pill" style="align-self:flex-start; line-height:1.55">Tema&nbsp;1&nbsp;·&nbsp;7 &nbsp;|&nbsp; Virtualización&nbsp;·&nbsp;11 &nbsp;|&nbsp; Docker&nbsp;·&nbsp;8 &nbsp;|&nbsp; AD&nbsp;·&nbsp;8 &nbsp;|&nbsp; Clústers&nbsp;·&nbsp;6</div>
+            <p>40 preguntas con la proporción orientativa del examen: Tema 1, virtualización, Docker, dominios/AD, ampliación de AD y clústers. Con cronómetro opcional de 45 minutos.</p>
+            <div class="pill" style="align-self:flex-start; line-height:1.55">Tema&nbsp;1&nbsp;·&nbsp;6 &nbsp;|&nbsp; Virtualización&nbsp;·&nbsp;9 &nbsp;|&nbsp; Docker&nbsp;·&nbsp;7 &nbsp;|&nbsp; Dominios/AD&nbsp;·&nbsp;7 &nbsp;|&nbsp; AD&nbsp;ampliación&nbsp;·&nbsp;6 &nbsp;|&nbsp; Clústers&nbsp;·&nbsp;5</div>
           </div>
           <button class="btn primary" id="examBtn" type="button">Empezar simulacro →</button>
         </article>
@@ -485,7 +485,7 @@
         <div class="section-head">
           <div>
             <h2>Contenido del banco</h2>
-            <p>Preguntas extraídas de los cuatro PDFs, con teoría y casos de uso.</p>
+            <p>Preguntas extraídas de los apuntes y PDFs de la asignatura, con teoría y casos de uso.</p>
           </div>
           <button class="btn ghost small" id="resetStatsBtn" type="button">Borrar progreso</button>
         </div>
@@ -507,6 +507,7 @@
       <article class="quiz-card">
         <div class="question-head">
           <span class="badge" id="qTopic">Tema</span>
+          <span class="badge ghost hidden" id="qSubtopic">Subtema</span>
           <span class="badge ghost" id="qType">Teoría</span>
           <span class="q-counter" id="qCounter">Pregunta 1 de 40</span>
         </div>
@@ -636,6 +637,7 @@
 <script src="questions-t2.js"></script>
 <script src="questions-docker.js"></script>
 <script src="questions-t3.js"></script>
+<script src="questions-adamp.js"></script>
 <script src="questions-clusters.js"></script>
 <script src="questions.js"></script>
 <script src="app.js"></script>
