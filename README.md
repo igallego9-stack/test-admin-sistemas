@@ -2,6 +2,12 @@
 
 Aplicación web de repaso para el examen de **Administración de Sistemas Inteligentes**. Funciona directamente en el navegador, sin instalación ni conexión a internet.
 
+## ▶️ Abrir el test
+
+**[Haz clic aquí para abrir el test](https://igallego9-stack.github.io/test-admin-sistemas/)**
+
+No hace falta cuenta de GitHub, ni descargar archivos, ni instalar nada. Se abre directamente en el navegador.
+
 ## Contenido
 
 - **168 preguntas** tipo test con 3 opciones y una única respuesta correcta.
