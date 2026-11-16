@@ -10,7 +10,7 @@ No hace falta cuenta de GitHub, ni descargar archivos, ni instalar nada. Se abre
 
 ## Contenido
 
-- **244 preguntas** tipo test con 3 opciones, una única respuesta correcta y opciones en orden aleatorio en cada intento.
+- **270 preguntas** tipo test con 3 opciones, una única respuesta correcta y opciones en orden aleatorio en cada intento.
 - Distractores equilibrados en longitud: la respuesta correcta no destaca por ser la más larga ni la más corta.
 - Temas incluidos:
   - Tema 1: Sistemas de Información.
@@ -18,11 +18,12 @@ No hace falta cuenta de GitHub, ni descargar archivos, ni instalar nada. Se abre
   - Docker: imágenes, contenedores, volúmenes, redes y casos de uso.
   - Dominios, Active Directory, GPO y PowerShell.
   - **Ampliación de AD**: bloques y dominios, presentación de AD, controladores de dominio, niveles funcionales, replicación de la base de datos y actualización de GPO.
-  - Clústers: alta disponibilidad, balanceo de carga, HPC y almacenamiento distribuido.
+  - Clústers: teoría general, alta disponibilidad (RTO/RPO, quórum, split-brain, fencing), balanceo de carga (L4/L7, sticky sessions, health checks) y almacenamiento distribuido.
 - **Simulacro de 40 preguntas** con una distribución orientativa del examen real: Tema 1 · 6, Virtualización · 9, Docker · 7, Dominios/AD · 7, Ampliación de AD · 6 y Clústers · 5.
 - Cada pregunta muestra el **tema** al que pertenece y, cuando aplica, el **subtema** concreto.
-- **Secciones dirigidas**: HPC vs HTC (21 preguntas entre teoría y casos prácticos) y Tiempos AD (20 preguntas de replicación y GPO).
+- **Secciones dirigidas**: HPC vs HTC (21 preguntas entre teoría y casos prácticos), Tiempos AD (20 preguntas de replicación y GPO) y HA y LB (30 preguntas de alta disponibilidad y balanceo).
 - **Práctica por temas** con selector de número de preguntas.
+- Navegación con botones **Anterior**, **Saltar** y **Siguiente**; al retroceder se conserva la respuesta y su corrección.
 - **Repaso de fallos** guardado en el navegador.
 - Corrección inmediata con explicación breve de cada error.
 - Penalización de **−0,5 por fallo** (las preguntas en blanco no restan).

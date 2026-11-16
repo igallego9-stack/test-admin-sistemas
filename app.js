@@ -367,12 +367,21 @@
     const feedback = $("#feedback");
     feedback.className = "feedback hidden";
     feedback.innerHTML = "";
-    $("#nextBtn").disabled = true;
+    const ans = quiz.answers[quiz.index];
+    const hasAnswer = Boolean(ans && ans.recorded && ans.selected !== null);
+    quiz.selected = hasAnswer ? ans.selected : null;
+    quiz.locked = Boolean(quiz.immediate && hasAnswer);
+    $("#nextBtn").disabled = !hasAnswer;
     $("#nextBtn").textContent = quiz.index === quiz.questions.length - 1 ? "Ver resultados →" : "Siguiente →";
-    $("#skipBtn").disabled = false;
+    $("#skipBtn").disabled = hasAnswer;
     $("#skipBtn").textContent = quiz.index === quiz.questions.length - 1 ? "Saltar y terminar" : "Saltar";
-    quiz.selected = null;
-    quiz.locked = false;
+    $("#prevBtn").disabled = quiz.index === 0;
+    if (quiz.locked) {
+      paintOptions();
+      showFeedback();
+    } else if (hasAnswer) {
+      paintSelectedOnly();
+    }
     updateProgress();
     updateLiveScore();
   }
@@ -466,6 +475,16 @@
       return;
     }
     quiz.index += 1;
+    renderQuestion();
+  }
+
+  function previousQuestion() {
+    if (!quiz.active || quiz.index === 0) return;
+    if (!quiz.locked) {
+      if (quiz.selected === null) recordBlank();
+      else recordAnswer();
+    }
+    quiz.index -= 1;
     renderQuestion();
   }
 
@@ -716,6 +735,7 @@
     });
 
     $("#nextBtn").addEventListener("click", nextQuestion);
+    $("#prevBtn").addEventListener("click", previousQuestion);
     $("#skipBtn").addEventListener("click", skipQuestion);
     $("#quitBtn").addEventListener("click", () => {
       if (!confirm("¿Salir del test? Se perderá el progreso de esta prueba.")) return;
@@ -781,6 +801,9 @@
       if (e.key === "1" || e.key === "2" || e.key === "3") {
         const idx = Number(e.key) - 1;
         if (idx < quiz.questions[quiz.index].o.length) handleOption(idx);
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        previousQuestion();
       } else if (e.key === "Enter") {
         if (e.target && e.target.tagName === "BUTTON") return;
         if (!$("#nextBtn").disabled) {

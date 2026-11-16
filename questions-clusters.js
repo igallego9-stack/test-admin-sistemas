@@ -118,7 +118,7 @@ const BANK_CLUSTERS = [
     e: "La clave es latencia frente a throughput. Si las tareas dependen unas de otras, la red de baja latencia es imprescindible (HPC). Si son independientes, un buen scheduler de colas es suficiente (HTC)."
   },
   {
-    id: "cl-12", t: "CLUSTERS", k: "Teoría",
+    id: "cl-12", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
     q: "¿Cuál es el objetivo primordial de un clúster HA?",
     o: [
       "Mantener la continuidad del servicio y mitigar el fallo del primario con failover automático.",
@@ -129,7 +129,7 @@ const BANK_CLUSTERS = [
     e: "HA busca continuidad y disponibilidad. Su diseño persigue RTO y RPO cercanos a cero mediante redundancia y conmutación por error automática y transparente."
   },
   {
-    id: "cl-13", t: "CLUSTERS", k: "Teoría",
+    id: "cl-13", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
     q: "¿Qué es el failover?",
     o: [
       "El cambio automático al sistema de respaldo cuando el primario falla.",
@@ -140,7 +140,7 @@ const BANK_CLUSTERS = [
     e: "Failover es la conmutación automática al sistema de respaldo cuando falla el primario. Failback es el proceso inverso: devolver los servicios al primario una vez reparado y verificado."
   },
   {
-    id: "cl-14", t: "CLUSTERS", k: "Teoría",
+    id: "cl-14", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
     q: "¿Qué diferencia hay entre un clúster HA activo-pasivo y uno activo-activo?",
     o: [
       "Activo-pasivo mantiene nodos en espera; activo-activo usa todos y complica la concurrencia.",
@@ -151,7 +151,7 @@ const BANK_CLUSTERS = [
     e: "En activo-pasivo uno o más nodos están en standby: es más simple y el failover es limpio, pero se desaprovechan recursos. En activo-activo todos trabajan: mayor throughput, pero mayor complejidad de concurrencia y consistencia."
   },
   {
-    id: "cl-15", t: "CLUSTERS", k: "Teoría",
+    id: "cl-15", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
     q: "¿Qué función tiene Pacemaker en un clúster HA?",
     o: [
       "Es el gestor de recursos que decide la salud de los servicios y automatiza el failover.",
@@ -162,7 +162,7 @@ const BANK_CLUSTERS = [
     e: "Pacemaker es el gestor de recursos: utiliza la información de Corosync para saber si los servicios están sanos y mueve los recursos a un nodo superviviente cuando es necesario."
   },
   {
-    id: "cl-16", t: "CLUSTERS", k: "Teoría",
+    id: "cl-16", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
     q: "¿Qué aporta Corosync en un clúster HA?",
     o: [
       "La capa de pertenencia y comunicación (heartbeat) que permite detectar el estado de los nodos.",
@@ -173,7 +173,7 @@ const BANK_CLUSTERS = [
     e: "Corosync proporciona la pertenencia al clúster y el heartbeat. Los nodos se monitorizan entre sí y esa información es la base para detectar fallos; Pacemaker actúa sobre ella."
   },
   {
-    id: "cl-17", t: "CLUSTERS", k: "Teoría",
+    id: "cl-17", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
     q: "¿Qué es el failback?",
     o: [
       "Devolver los servicios al nodo primario tras repararlo y verificar su estado.",
@@ -184,7 +184,7 @@ const BANK_CLUSTERS = [
     e: "Failback es la vuelta controlada al nodo primario después de repararlo y verificarlo. No debe confundirse con failover, que es la ida al respaldo."
   },
   {
-    id: "cl-18", t: "CLUSTERS", k: "Teoría",
+    id: "cl-18", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
     q: "¿Cuál es la función principal de un clúster LB (Load Balancing)?",
     o: [
       "Repartir el tráfico entrante entre servidores backend para escalar y ganar disponibilidad.",
@@ -195,7 +195,7 @@ const BANK_CLUSTERS = [
     e: "LB reparte las solicitudes entrantes entre nodos backend. Aporta escalabilidad horizontal y redundancia: si un nodo falla, el tráfico se redirige a los restantes."
   },
   {
-    id: "cl-19", t: "CLUSTERS", k: "Teoría",
+    id: "cl-19", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
     q: "¿Qué es el algoritmo Weighted Round-Robin?",
     o: [
       "Un algoritmo estático que reparte por turnos según pesos fijados por la capacidad de cada servidor.",
@@ -206,7 +206,7 @@ const BANK_CLUSTERS = [
     e: "Weighted Round-Robin es estático: reparte por turnos ponderados según capacidad o prioridad. Los algoritmos dinámicos, en cambio, consideran la carga y las conexiones activas antes de enrutar."
   },
   {
-    id: "cl-20", t: "CLUSTERS", k: "Teoría",
+    id: "cl-20", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
     q: "¿Qué caracteriza a los algoritmos dinámicos de balanceo de carga?",
     o: [
       "Tienen en cuenta el estado actual de los servidores, como su carga o conexiones activas.",
@@ -217,7 +217,7 @@ const BANK_CLUSTERS = [
     e: "Los algoritmos dinámicos adaptan la decisión al estado actual de los servidores (carga, conexiones activas). Los estáticos usan una asignación fija por capacidad o prioridad."
   },
   {
-    id: "cl-21", t: "CLUSTERS", k: "Teoría",
+    id: "cl-21", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
     q: "¿Qué herramientas se citan para balanceo de carga?",
     o: ["HAProxy y NGINX / NGINX Plus", "Pacemaker y Corosync", "Ceph y GlusterFS"],
     c: 0,
@@ -279,7 +279,7 @@ const BANK_CLUSTERS = [
     e: "Los fotogramas son tareas independientes: no necesitan sincronización constante. HTC maximiza el número de tareas terminadas y puede usar recursos heterogéneos y oportunistas, más económicos."
   },
   {
-    id: "cl-27", t: "CLUSTERS", k: "Caso práctico",
+    id: "cl-27", t: "CLUSTERS", s: "HA y LB", k: "Caso práctico",
     q: "Una empresa tiene una base de datos transaccional que debe estar disponible 24/7 y no puede perder datos. ¿Qué clúster prioriza?",
     o: [
       "HA, porque busca continuidad con failover automático y RTO y RPO cercanos a cero.",
@@ -290,7 +290,7 @@ const BANK_CLUSTERS = [
     e: "Es un servicio de misión crítica: se busca continuidad con failover automático y RTO/RPO cercanos a cero. HA es la arquitectura adecuada; LB reparte tráfico, no garantiza la consistencia de la base de datos."
   },
   {
-    id: "cl-28", t: "CLUSTERS", k: "Caso práctico",
+    id: "cl-28", t: "CLUSTERS", s: "HA y LB", k: "Caso práctico",
     q: "Una web recibe miles de solicitudes por segundo y necesita añadir servidores según la demanda sin cortar el servicio. ¿Qué clúster es adecuado?",
     o: [
       "LB, porque reparte el tráfico entre servidores y permite escalar horizontalmente.",
@@ -431,5 +431,287 @@ const BANK_CLUSTERS = [
     ],
     c: 0,
     e: "Los equipos están dispersos, no son dedicados y las prácticas son independientes. HTC con HTCondor y checkpointing aprovecha esos recursos oportunistas; HPC exige un clúster dedicado y una red de baja latencia."
+  },
+  {
+    id: "cl-41", t: "CLUSTERS", k: "Teoría",
+    q: "¿Qué es un nodo dentro de un clúster?",
+    o: [
+      "Un equipo independiente que aporta sus recursos al conjunto.",
+      "Un proceso del sistema que reparte las tareas entre los discos.",
+      "Un conmutador de red que conecta los servidores del clúster."
+    ],
+    c: 0,
+    e: "Cada nodo es una máquina independiente, física o virtual, con su propio sistema operativo y recursos. El clúster los coordina para que trabajen como una sola unidad."
+  },
+  {
+    id: "cl-42", t: "CLUSTERS", k: "Teoría",
+    q: "¿Qué es el almacenamiento distribuido?",
+    o: [
+      "Datos repartidos entre nodos, con replicación y acceso como una sola unidad.",
+      "Un único disco externo conectado por fibra a todos los servidores del clúster.",
+      "Una copia de seguridad en cinta guardada fuera de las instalaciones del CPD."
+    ],
+    c: 0,
+    e: "El almacenamiento distribuido reparte los datos entre varios nodos y los replica, de modo que el conjunto se presenta como un único sistema de almacenamiento. No es un disco externo ni una copia de seguridad."
+  },
+  {
+    id: "cl-43", t: "CLUSTERS", k: "Teoría",
+    q: "¿Qué es un punto único de fallo (SPOF)?",
+    o: [
+      "Un componente cuya caída deja sin servicio a todo el sistema.",
+      "Un nodo que ejecuta tareas de cómputo y almacena los resultados.",
+      "Un algoritmo que reparte las peticiones entre varios servidores."
+    ],
+    c: 0,
+    e: "Un SPOF es cualquier componente sin redundancia cuya caída interrumpe el servicio: un único balanceador, un solo enlace, un solo CPD o una única fuente de alimentación."
+  },
+  {
+    id: "cl-44", t: "CLUSTERS", k: "Teoría",
+    q: "¿Qué ventaja tiene la escalabilidad horizontal frente a la vertical?",
+    o: [
+      "Añade nodos sin depender del límite físico de un único servidor.",
+      "Añade CPU y RAM a un nodo hasta el máximo que admite la placa.",
+      "Reduce el número de servidores necesarios para atender la carga."
+    ],
+    c: 0,
+    e: "La escala horizontal añade nodos y no está limitada por la placa de un servidor; la vertical añade CPU o RAM dentro de un nodo y tiene un techo físico."
+  },
+  {
+    id: "cl-45", t: "CLUSTERS", k: "Teoría",
+    q: "¿Qué aporta la elasticidad en un clúster?",
+    o: [
+      "Ajustar los recursos a la demanda, añadiendo o quitando nodos.",
+      "Mantener los recursos fijos para evitar picos de facturación.",
+      "Duplicar el hardware para que nunca haya cambios de capacidad."
+    ],
+    c: 0,
+    e: "La elasticidad permite crecer o decrecer según la demanda. Es una ventaja del aprovisionamiento dinámico, sobre todo en la nube, frente a mantener recursos fijos."
+  },
+  {
+    id: "cl-46", t: "CLUSTERS", k: "Caso práctico",
+    q: "Una empresa agota la CPU y la RAM de su único servidor y ya no admite más ampliación. ¿Qué opción es más razonable?",
+    o: [
+      "Escalar horizontalmente y añadir nodos que repartan la carga de trabajo.",
+      "Escalar verticalmente con un servidor mayor, aunque el límite se repita.",
+      "Mantener el servidor y añadir un balanceador que genere más capacidad."
+    ],
+    c: 0,
+    e: "Si el servidor ha agotado su capacidad y ya no admite más ampliación, la salida es añadir nodos y repartir la carga. Un balanceador por sí solo no genera capacidad."
+  },
+  {
+    id: "cl-47", t: "CLUSTERS", k: "Caso práctico",
+    q: "Una empresa tiene discos locales infrautilizados en muchos servidores y quiere sumar su capacidad. ¿Qué solución encaja?",
+    o: [
+      "Almacenamiento distribuido, que agrega y replica el espacio de los nodos.",
+      "Un balanceador de carga, que reparte los archivos entre los discos libres.",
+      "Un clúster HA, que conmuta los discos al nodo pasivo cuando hace falta."
+    ],
+    c: 0,
+    e: "El almacenamiento distribuido agrega el espacio de varios nodos, replica los datos y los presenta como una sola unidad. Un balanceador y HA no convierten discos locales en almacenamiento compartido."
+  },
+  {
+    id: "cl-48", t: "CLUSTERS", k: "Teoría",
+    q: "¿Qué significa que el clúster sea transparente para el usuario?",
+    o: [
+      "Que accede al servicio sin conocer la topología ni el nodo que lo atiende.",
+      "Que puede ver y administrar cada nodo por separado sin restricciones.",
+      "Que el clúster replica sus datos en todos los equipos del usuario final."
+    ],
+    c: 0,
+    e: "La transparencia significa que el usuario final usa el servicio sin conocer la topología ni el nodo que lo atiende; la administración sigue siendo posible para el equipo técnico."
+  },
+  {
+    id: "cl-49", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
+    q: "¿Qué mide el RTO (Recovery Time Objective)?",
+    o: [
+      "El tiempo máximo aceptable para restaurar el servicio tras un fallo.",
+      "La cantidad máxima de datos que el servicio acepta perder en un fallo.",
+      "El número de nodos en espera que debe tener configurado el clúster HA."
+    ],
+    c: 0,
+    e: "El RTO es el tiempo objetivo de recuperación: cuánto puede tardar el servicio en volver a estar operativo tras un fallo. El RPO mide los datos que se acepta perder."
+  },
+  {
+    id: "cl-50", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
+    q: "¿Qué mide el RPO (Recovery Point Objective)?",
+    o: [
+      "La cantidad máxima de datos que se acepta perder tras un fallo.",
+      "El tiempo máximo que tarda el servicio en volver a estar activo.",
+      "El porcentaje de tráfico que el balanceador envía al nodo pasivo."
+    ],
+    c: 0,
+    e: "El RPO es el punto de recuperación objetivo: cuántos datos puede perder el servicio. Un RPO de cero exige replicación síncrona o copias sin pérdida."
+  },
+  {
+    id: "cl-51", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
+    q: "¿Qué es el split-brain en un clúster HA?",
+    o: [
+      "Dos nodos creen ser el primario y acceden a la vez a los mismos recursos.",
+      "Un nodo secundario se apaga y el primario absorbe toda la carga.",
+      "El heartbeat detecta un fallo y activa el failover de forma ordenada."
+    ],
+    c: 0,
+    e: "En split-brain ambos nodos se creen primarios y pueden escribir a la vez sobre los mismos recursos, lo que provoca corrupción. Se evita con quórum y fencing."
+  },
+  {
+    id: "cl-52", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
+    q: "¿Para qué sirve el quórum en un clúster HA?",
+    o: [
+      "Para que solo la parte con mayoría de votos pueda actuar como primaria.",
+      "Para repartir el tráfico entre todos los nodos activos del clúster.",
+      "Para sincronizar los datos entre el nodo primario y el de respaldo."
+    ],
+    c: 0,
+    e: "El quórum exige mayoría de votos para que una partición del clúster pueda operar como primaria. Sin mayoría, el nodo se detiene o se aísla para evitar el split-brain."
+  },
+  {
+    id: "cl-53", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
+    q: "¿Qué es el fencing (STONITH) en alta disponibilidad?",
+    o: [
+      "Aislar o apagar el nodo caído para que no acceda a los recursos compartidos.",
+      "Repartir las conexiones entre los nodos sanos cuando uno deja de responder.",
+      "Replicar el almacenamiento del primario en el secundario antes del failover."
+    ],
+    c: 0,
+    e: "Fencing o STONITH aísla el nodo que no responde, por red o apagándolo, para garantizar que no siga usando el almacenamiento compartido mientras el secundario toma el relevo."
+  },
+  {
+    id: "cl-54", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
+    q: "¿Qué diferencia hay entre alta disponibilidad y tolerancia a fallos?",
+    o: [
+      "HA conmuta con una breve interrupción; la tolerancia mantiene la ejecución sin parar.",
+      "HA mantiene la ejecución sin parar; la tolerancia conmuta con una breve interrupción.",
+      "Ambas son idénticas: solo cambia el nombre comercial que usa cada fabricante."
+    ],
+    c: 0,
+    e: "La alta disponibilidad conmuta al respaldo y puede haber una interrupción breve. La tolerancia a fallos mantiene la ejecución sin interrupción, normalmente con hardware redundante y sincronizado."
+  },
+  {
+    id: "cl-55", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
+    q: "¿Qué es una VIP (IP virtual) en un clúster HA?",
+    o: [
+      "Una dirección flotante que se mueve al nodo activo durante el failover.",
+      "Una dirección fija asignada a cada nodo para administrarlo por separado.",
+      "Un rango de direcciones que el balanceador reparte entre los clientes."
+    ],
+    c: 0,
+    e: "La VIP es una dirección flotante asociada al servicio, no al nodo. Durante el failover se mueve al nuevo primario y los clientes siguen usando la misma dirección."
+  },
+  {
+    id: "cl-56", t: "CLUSTERS", s: "HA y LB", k: "Caso práctico",
+    q: "Dos nodos HA pierden el heartbeat entre sí, pero ambos siguen activos y escriben en el mismo disco. ¿Qué riesgo aparece?",
+    o: [
+      "Split-brain: ambos se creen primarios y pueden corromper los datos.",
+      "Failback: el nodo secundario devuelve los servicios al primario.",
+      "Round-Robin: el balanceador reparte las escrituras entre los dos nodos."
+    ],
+    c: 0,
+    e: "Si los dos nodos siguen activos y comparten disco sin quórum, se produce split-brain. El fencing y el quórum evitan que ambos escriban a la vez."
+  },
+  {
+    id: "cl-57", t: "CLUSTERS", s: "HA y LB", k: "Caso práctico",
+    q: "Un servicio exige recuperarse en menos de 5 minutos y no perder ninguna transacción. ¿Qué diseño encaja?",
+    o: [
+      "HA con failover automático y replicación síncrona de los datos.",
+      "HTC con checkpointing y reintentos de las tareas transaccionales.",
+      "LB con Round-Robin y varias copias del servicio en cada nodo."
+    ],
+    c: 0,
+    e: "Un RTO de 5 minutos y un RPO de cero encajan con HA y replicación síncrona: el secundario tiene los mismos datos y puede asumir el servicio con conmutación automática."
+  },
+  {
+    id: "cl-58", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
+    q: "¿Qué es el heartbeat en un clúster HA?",
+    o: [
+      "Una señal periódica entre nodos para detectar si el otro sigue vivo.",
+      "Un algoritmo que reparte las peticiones según la carga de cada nodo.",
+      "Una copia síncrona de los datos que se envía al nodo de respaldo."
+    ],
+    c: 0,
+    e: "El heartbeat es la señal periódica que intercambian los nodos para comprobar que siguen vivos. Si deja de llegar, el clúster puede declarar el fallo y activar el failover."
+  },
+  {
+    id: "cl-59", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
+    q: "¿Qué diferencia hay entre un balanceo de capa 4 y uno de capa 7?",
+    o: [
+      "El de capa 4 reparte por IP y puerto; el de capa 7 decide por contenido HTTP.",
+      "El de capa 4 decide por contenido HTTP; el de capa 7 reparte por IP y puerto.",
+      "El de capa 4 solo funciona con UDP; el de capa 7 solo funciona con TCP."
+    ],
+    c: 0,
+    e: "El balanceo de capa 4 trabaja con IP, puerto y protocolo de transporte; el de capa 7 inspecciona la petición HTTP y puede enrutar por URL, cabecera o cookie."
+  },
+  {
+    id: "cl-60", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
+    q: "¿Qué son las sesiones persistentes (sticky sessions) en un balanceador?",
+    o: [
+      "Enviar las peticiones de un mismo cliente siempre al mismo servidor backend.",
+      "Guardar la sesión en el balanceador y borrarla cuando el cliente se desconecta.",
+      "Repartir cada petición del cliente entre todos los servidores por turnos."
+    ],
+    c: 0,
+    e: "Las sticky sessions fijan al cliente a un backend concreto para que mantenga su sesión. Si el backend cae, esa sesión se pierde salvo que se comparta o replique."
+  },
+  {
+    id: "cl-61", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
+    q: "¿Qué es un health check en un balanceador de carga?",
+    o: [
+      "Una comprobación periódica para saber si cada backend puede atender tráfico.",
+      "Un registro que guarda el tiempo de respuesta de cada petición atendida.",
+      "Una copia de la configuración del balanceador en el nodo de respaldo."
+    ],
+    c: 0,
+    e: "El health check comprueba periódicamente si el backend responde y, si falla, el balanceador deja de enviarle tráfico hasta que se recupere."
+  },
+  {
+    id: "cl-62", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
+    q: "¿Cómo reparte el algoritmo Round-Robin las peticiones?",
+    o: [
+      "Por turnos equitativos entre todos los servidores disponibles.",
+      "Siempre al servidor con menos conexiones activas en ese momento.",
+      "Según el peso o la capacidad configurada para cada servidor."
+    ],
+    c: 0,
+    e: "Round-Robin reparte por turnos equitativos. Weighted Round-Robin usa pesos y Least Connections elige el servidor con menos conexiones activas."
+  },
+  {
+    id: "cl-63", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
+    q: "¿Qué algoritmo envía cada nueva petición al servidor con menos conexiones activas?",
+    o: ["Least Connections", "Weighted Round-Robin", "Source IP Hash"],
+    c: 0,
+    e: "Least Connections es un algoritmo dinámico: consulta el estado actual y elige el backend con menos conexiones. Weighted Round-Robin reparte por pesos fijos y Source IP Hash mantiene al cliente en el mismo servidor."
+  },
+  {
+    id: "cl-64", t: "CLUSTERS", s: "HA y LB", k: "Teoría",
+    q: "¿Cuál es la diferencia principal entre un clúster LB y uno HA?",
+    o: [
+      "LB reparte carga entre nodos activos; HA conmuta al respaldo si el primario falla.",
+      "LB conmuta al nodo de respaldo; HA reparte la carga entre todos los nodos.",
+      "Ambos solo se diferencian en el protocolo de heartbeat que utiliza cada nodo."
+    ],
+    c: 0,
+    e: "LB distribuye tráfico entre nodos activos para escalar; HA mantiene un primario y conmuta al respaldo cuando falla. Son objetivos distintos y pueden combinarse."
+  },
+  {
+    id: "cl-65", t: "CLUSTERS", s: "HA y LB", k: "Caso práctico",
+    q: "Una aplicación guarda la sesión del usuario en la memoria de cada backend y hay varios servidores. ¿Qué necesitas configurar?",
+    o: [
+      "Persistencia de sesión para que cada usuario vuelva a su mismo backend.",
+      "Round-Robin puro para que las peticiones cambien de servidor en cada clic.",
+      "Fencing para apagar el backend que pierde la sesión del usuario."
+    ],
+    c: 0,
+    e: "Si la sesión vive en la memoria de cada backend, el balanceador debe mantener al usuario en el mismo servidor o compartir la sesión entre todos. Round-Robin puro rompería la sesión."
+  },
+  {
+    id: "cl-66", t: "CLUSTERS", s: "HA y LB", k: "Caso práctico",
+    q: "La web de una empresa usa un único balanceador y este se convierte en un punto único de fallo. ¿Qué solución lo evita?",
+    o: [
+      "Desplegar dos balanceadores redundantes con una IP virtual compartida.",
+      "Añadir más servidores backend para repartir mejor la carga entre ellos.",
+      "Activar el checkpointing para reanudar las sesiones en otro servidor."
+    ],
+    c: 0,
+    e: "Un único balanceador es un SPOF. La solución es redundarlo, normalmente con dos nodos y una VIP compartida, para que el fallo de uno no corte el servicio."
   }
 ];

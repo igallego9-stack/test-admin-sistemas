@@ -368,8 +368,11 @@
       .result-metrics { grid-template-columns: 1fr 1fr; }
       .topic-bar { grid-template-columns: 104px 1fr 30px; }
       .breakdown-row { grid-template-columns: 110px 1fr 60px; }
-      .quiz-actions { flex-direction: column-reverse; }
+      .quiz-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
       .quiz-actions .btn { width: 100%; }
+      .quiz-actions #nextBtn { grid-column: 1 / -1; order: 2; }
+      .quiz-actions #prevBtn { order: 0; }
+      .quiz-actions #skipBtn { order: 1; }
       .result-score { align-items: flex-start; text-align: left; }
     }
   </style>
@@ -535,10 +538,11 @@
         <div class="options" id="options"></div>
         <div class="feedback hidden" id="feedback" role="status" aria-live="polite"></div>
         <div class="quiz-actions">
+          <button class="btn ghost" id="prevBtn" type="button" disabled>← Anterior</button>
           <button class="btn ghost" id="skipBtn" type="button">Saltar</button>
           <button class="btn primary" id="nextBtn" type="button" disabled>Siguiente →</button>
         </div>
-        <p class="kbd-hint">Atajos: <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> para responder · <kbd>Enter</kbd> para siguiente</p>
+        <p class="kbd-hint">Atajos: <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> para responder · <kbd>←</kbd> anterior · <kbd>Enter</kbd> siguiente</p>
       </article>
     </section>
 
@@ -646,8 +650,8 @@
           <li><b>HPC:</b> minimiza latencia/TTS; tareas fuertemente acopladas; MPI, InfiniBand, Slurm/PBS, GPU/FPGA.</li>
           <li><b>HTC:</b> maximiza throughput; tareas independientes; HTCondor, checkpointing, Grid Engine; no necesita red de ultrabaja latencia.</li>
           <li><b>Cómo decidir:</b> si las tareas se comunican y sincronizan en cada paso → HPC; si son independientes y prima completar muchas por hora → HTC.</li>
-          <li><b>HA:</b> continuidad y failover; RTO/RPO ≈ 0; activo-pasivo vs activo-activo; Pacemaker (recursos) + Corosync (heartbeat); failback.</li>
-          <li><b>LB:</b> reparte tráfico entrante; escalado horizontal; Weighted Round-Robin (estático) vs dinámicos; HAProxy, NGINX Plus.</li>
+          <li><b>HA:</b> continuidad y failover; RTO (tiempo de recuperación) y RPO (datos perdidos) ≈ 0; quórum y fencing evitan split-brain; activo-pasivo vs activo-activo; Pacemaker (recursos) + Corosync (heartbeat); VIP flotante; failback.</li>
+          <li><b>LB:</b> reparte tráfico entrante; L4 (IP/puerto) vs L7 (contenido HTTP); sticky sessions y health checks; Round-Robin, Weighted Round-Robin (estático) y Least Connections (dinámico); HAProxy, NGINX Plus.</li>
           <li><b>Almacenamiento:</b> SDS; Ceph (S3, RBD, CephFS), GlusterFS (hasta 16 EB, mal rendimiento de metadatos); elegir por perfil de E/S.</li>
         </ul>
       </article>

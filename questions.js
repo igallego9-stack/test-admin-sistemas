@@ -25,6 +25,14 @@ const SECTIONS = [
     topic: "ADAMP",
     color: "#8b5cf6",
     desc: "Replicación de la base de datos y actualización de directivas."
+  },
+  {
+    id: "HA y LB",
+    label: "HA y LB",
+    badge: "HA y LB",
+    topic: "CLUSTERS",
+    color: "#f97316",
+    desc: "Alta disponibilidad, failover y balanceo de carga."
   }
 ];
 
