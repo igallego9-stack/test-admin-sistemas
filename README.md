@@ -10,7 +10,7 @@ No hace falta cuenta de GitHub, ni descargar archivos, ni instalar nada. Se abre
 
 ## Contenido
 
-- **270 preguntas** tipo test con 3 opciones, una única respuesta correcta y opciones en orden aleatorio en cada intento.
+- **295 preguntas** tipo test con 3 opciones, una única respuesta correcta y opciones en orden aleatorio en cada intento.
 - Distractores equilibrados en longitud: la respuesta correcta no destaca por ser la más larga ni la más corta.
 - Temas incluidos:
   - Tema 1: Sistemas de Información.
@@ -21,7 +21,7 @@ No hace falta cuenta de GitHub, ni descargar archivos, ni instalar nada. Se abre
   - Clústers: teoría general, alta disponibilidad (RTO/RPO, quórum, split-brain, fencing), balanceo de carga (L4/L7, sticky sessions, health checks) y almacenamiento distribuido.
 - **Simulacro de 40 preguntas** con una distribución orientativa del examen real: Tema 1 · 6, Virtualización · 9, Docker · 7, Dominios/AD · 7, Ampliación de AD · 6 y Clústers · 5.
 - Cada pregunta muestra el **tema** al que pertenece y, cuando aplica, el **subtema** concreto.
-- **Secciones dirigidas**: HPC vs HTC (21 preguntas entre teoría y casos prácticos), Tiempos AD (20 preguntas de replicación y GPO) y HA y LB (30 preguntas de alta disponibilidad y balanceo).
+- **Secciones dirigidas**: HPC vs HTC (21 preguntas entre teoría y casos prácticos), Tiempos AD (20 preguntas de replicación y GPO), HA y LB (30 preguntas de alta disponibilidad y balanceo) y Examen de otro año (25 preguntas disponibles; faltan las páginas 1-5 y 16-20).
 - **Práctica por temas** con selector de número de preguntas.
 - Navegación con botones **Anterior**, **Saltar** y **Siguiente**; al retroceder se conserva la respuesta y su corrección.
 - **Repaso de fallos** guardado en el navegador.

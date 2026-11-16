@@ -11,6 +11,14 @@ const TOPICS = {
 /* Secciones dirigidas: filtran por el subtema (campo s) */
 const SECTIONS = [
   {
+    id: "Examen de otro año",
+    label: "Examen de otro año",
+    badge: "Examen de otro año",
+    topic: "MIXTO",
+    color: "#22c55e",
+    desc: "Preguntas 6-15 y 21-35; faltan las páginas 1-5 y 16-20."
+  },
+  {
     id: "HPC vs HTC",
     label: "HPC vs HTC",
     badge: "HPC vs HTC",
@@ -42,7 +50,8 @@ const BANK = [
   ...BANK_DOCKER,
   ...BANK_T3,
   ...BANK_ADAMP,
-  ...BANK_CLUSTERS
+  ...BANK_CLUSTERS,
+  ...BANK_EXAM
 ];
 
 /* Distribución del simulacro de 40 preguntas */
