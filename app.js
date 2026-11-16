@@ -187,6 +187,12 @@
     return shuffled.slice(0, n);
   }
 
+  function withShuffledOptions(q) {
+    if (!Array.isArray(q.o) || q.o.length < 2) return q;
+    const order = shuffle(q.o.map((_, i) => i));
+    return { ...q, o: order.map((i) => q.o[i]), c: order.indexOf(q.c) };
+  }
+
   function buildExamQuestions() {
     const picked = [];
     const used = new Set();
@@ -261,7 +267,7 @@
     quiz = {
       active: true,
       finished: false,
-      questions,
+      questions: questions.map(withShuffledOptions),
       answers: questions.map(() => ({ selected: null, correct: false, recorded: false })),
       index: 0,
       selected: null,

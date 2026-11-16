@@ -10,7 +10,8 @@ No hace falta cuenta de GitHub, ni descargar archivos, ni instalar nada. Se abre
 
 ## Contenido
 
-- **223 preguntas** tipo test con 3 opciones y una única respuesta correcta.
+- **223 preguntas** tipo test con 3 opciones, una única respuesta correcta y opciones en orden aleatorio en cada intento.
+- Distractores equilibrados en longitud: la respuesta correcta no destaca por ser la más larga ni la más corta.
 - Temas incluidos:
   - Tema 1: Sistemas de Información.
   - Tema 2: Virtualización (ventajas, desventajas, hipervisores y tipos).

@@ -4,8 +4,8 @@ const BANK_T2 = [
     id: "t2-01", t: "T2", k: "Teoría",
     q: "¿Qué es la virtualización?",
     o: [
-      "Una tecnología software que abstrae los recursos de un computador y proporciona acceso lógico a recursos físicos.",
-      "Un programa que elimina el sistema operativo anfitrión y ejecuta las aplicaciones directamente sobre el firmware.",
+      "Una tecnología software que abstrae los recursos de un computador y da acceso lógico a los físicos.",
+      "Un programa que elimina el SO anfitrión y ejecuta las aplicaciones directamente sobre el firmware.",
       "Un protocolo de red que conecta centros de datos y reparte el almacenamiento entre ellos."
     ],
     c: 0,
@@ -15,9 +15,9 @@ const BANK_T2 = [
     id: "t2-02", t: "T2", k: "Teoría",
     q: "¿Cuáles son las dos aproximaciones históricas de la virtualización?",
     o: [
-      "Hacer que un computador parezca múltiples computadores (virtualización) y que múltiples computadores parezcan uno solo (Grid Computing o Server Aggregation).",
+      "Dividir un computador en varias máquinas virtuales o agregar varios equipos en uno solo.",
       "La paravirtualización y la virtualización completa, según se modifique o no el SO invitado.",
-      "La virtualización de recursos y la de aplicaciones, que sustituyen a la virtualización de plataforma."
+      "La virtualización de recursos y la de aplicaciones, que sustituyen a la de plataforma."
     ],
     c: 0,
     e: "El tema distingue dos enfoques: dividir un equipo en varias máquinas virtuales o agregar varios equipos para que funcionen como uno (Grid Computing o Server Aggregation)."
@@ -26,9 +26,9 @@ const BANK_T2 = [
     id: "t2-03", t: "T2", k: "Teoría",
     q: "¿Qué objetivo tenía el ordenador Atlas (1962) relacionado con la virtualización?",
     o: [
-      "Fue el primer sistema de contenedores ligeros, precursor de Docker.",
-      "Permitir que muchos usuarios compartieran un único ordenador mediante terminales, con reparto de recursos y seguridad entre trabajos.",
-      "Fue un clúster HPC de los años 90 para simulación climática."
+      "Fue el primer sistema de contenedores ligeros y el precursor directo de Docker.",
+      "Permitir que muchos usuarios compartieran un ordenador mediante terminales y recursos repartidos.",
+      "Fue un clúster HPC de los años 90 diseñado para simulación climática y cálculo numérico avanzado."
     ],
     c: 1,
     e: "Atlas buscaba resolver los problemas del uso común de un ordenador por muchos trabajadores a través de terminales: repartía procesador y disco, y garantizaba que un trabajo no interfiriera con otro. Así nació la necesidad de particionar recursos."
@@ -39,7 +39,7 @@ const BANK_T2 = [
     o: [
       "Un proceso ligero que comparte el kernel del host y se limita a aislar la aplicación.",
       "Un contenedor software aislado que incluye hardware simulado, sistema operativo y aplicaciones.",
-      "Un disco virtual con extensión .vmdk que contiene el SO y los datos de la VM."
+      "Un disco virtual con extensión .vmdk que contiene el SO, las aplicaciones y los datos."
     ],
     c: 1,
     e: "La VM es un contenedor software perfectamente aislado e independiente, formado por hardware simulado + sistema operativo + aplicaciones. No es un simple proceso ni un disco."
@@ -49,8 +49,8 @@ const BANK_T2 = [
     q: "¿Cuál es la función del hipervisor o Virtual Machine Monitor (VMM)?",
     o: [
       "Desvincular las máquinas virtuales del host y asignar dinámicamente los recursos a cada VM.",
-      "Ser el sistema operativo invitado de cada máquina virtual.",
-      "Almacenar los snapshots y los ficheros .vmdk de las máquinas virtuales."
+      "Ser el sistema operativo invitado que se ejecuta dentro de cada máquina virtual.",
+      "Almacenar los snapshots y los ficheros .vmdk que pertenecen a las máquinas virtuales."
     ],
     c: 0,
     e: "El hipervisor desvincula las VM del host y asigna recursos dinámicamente según las necesidades. Puede ejecutarse directamente sobre el hardware o sobre un SO anfitrión."
@@ -60,7 +60,7 @@ const BANK_T2 = [
     q: "¿Qué es un hipervisor de tipo 1?",
     o: [
       "El que se ejecuta sobre un sistema operativo anfitrión, como VMware Workstation.",
-      "El que se ejecuta directamente sobre el hardware, como VMware ESXi.",
+      "El que se ejecuta directamente sobre el hardware del servidor, como VMware ESXi.",
       "El que se instala como una aplicación dentro de Windows y usa sus controladores."
     ],
     c: 1,
@@ -71,7 +71,7 @@ const BANK_T2 = [
     q: "¿Qué es un hipervisor de tipo 2?",
     o: [
       "El que se ejecuta sobre un SO anfitrión, como VMware Workstation o VirtualBox.",
-      "El que se ejecuta directamente sobre el hardware y ofrece mayor rendimiento.",
+      "El que se ejecuta directamente sobre el hardware y ofrece mayor rendimiento y aislamiento.",
       "El que no necesita un SO anfitrión porque incorpora sus propios controladores."
     ],
     c: 0,
@@ -92,9 +92,9 @@ const BANK_T2 = [
     id: "t2-09", t: "T2", k: "Teoría",
     q: "¿Qué caracteriza a la virtualización asistida por hardware?",
     o: [
-      "Añade instrucciones a la CPU que se ejecutan en ring -1 y aceleran las transiciones entre invitados y VMM.",
+      "Añade instrucciones a la CPU que se ejecutan en ring -1 y aceleran las transiciones con el VMM.",
       "Elimina el hipervisor y permite que cada VM acceda directamente a todos los dispositivos.",
-      "Solo se aplica a contenedores Docker porque comparten el kernel."
+      "Solo se aplica a contenedores Docker porque todos comparten el kernel del host."
     ],
     c: 0,
     e: "La virtualización asistida por hardware añade un conjunto de instrucciones a la CPU (Intel VT / AMD-V) que se ejecutan en ring -1. Permiten VMMs en modo privilegiado y aceleran las transiciones por hardware en vez de por software."
@@ -102,7 +102,11 @@ const BANK_T2 = [
   {
     id: "t2-10", t: "T2", k: "Teoría",
     q: "En virtualización asistida por hardware, ¿en qué anillo cree el SO invitado que se ejecuta?",
-    o: ["En ring 0", "En ring 3, porque el VMM lo degrada para aislarlo", "En ring -1, porque el hardware lo eleva por encima del VMM"],
+    o: [
+      "En ring 0, porque el hardware oculta al invitado que el VMM está en ring -1.",
+      "En ring 3, porque el VMM lo degrada para aislarlo del hardware real.",
+      "En ring -1, porque el hardware lo eleva por encima del propio VMM."
+    ],
     c: 0,
     e: "El SO invitado cree que se ejecuta en ring 0 (modo privilegiado), aunque realmente el VMM está en ring -1. El hardware captura las llamadas y guarda/restaura el estado de la CPU."
   },
@@ -111,8 +115,8 @@ const BANK_T2 = [
     q: "¿Cuál es la diferencia entre virtualización y Cloud Computing?",
     o: [
       "Son lo mismo: la nube es solo virtualización ejecutada en un CPD ajeno.",
-      "La virtualización es una tecnología que crea entornos; cloud es una metodología que automatiza recursos bajo demanda mediante APIs.",
-      "La virtualización automatiza recursos bajo demanda y la nube crea entornos aislados."
+      "La virtualización crea entornos aislados; cloud automatiza recursos bajo demanda mediante APIs.",
+      "La virtualización automatiza recursos bajo demanda y la nube se limita a crear entornos aislados."
     ],
     c: 1,
     e: "No son lo mismo. La virtualización es un componente que permite la nube. En virtualización el administrador gestiona el hipervisor y las VM; en cloud esas tareas se automatizan mediante APIs."
@@ -121,9 +125,9 @@ const BANK_T2 = [
     id: "t2-12", t: "T2", k: "Teoría",
     q: "¿Qué abstrae la virtualización de plataforma?",
     o: [
-      "Un recurso individual, como la conexión de red o la memoria virtual.",
-      "Todo el hardware subyacente de una plataforma, permitiendo ejecutar varios SO independientes.",
-      "Solo las aplicaciones, que se encapsulan con su propio runtime."
+      "Un recurso individual del sistema, como la conexión de red o la memoria virtual.",
+      "Todo el hardware de una plataforma, permitiendo ejecutar varios SO independientes.",
+      "Solo las aplicaciones, que se encapsulan junto con su propio runtime de ejecución."
     ],
     c: 1,
     e: "La virtualización de plataforma abstrae un sistema completo: el hardware subyacente. Así múltiples instancias de SO pueden ejecutarse de forma independiente."
@@ -133,8 +137,8 @@ const BANK_T2 = [
     q: "¿Qué es la paravirtualización?",
     o: [
       "El hipervisor ofrece APIs (hypercalls) y el SO invitado debe estar modificado para usarlas.",
-      "El hipervisor emula todo el hardware y el SO invitado no necesita modificaciones.",
-      "Los invitados comparten el kernel del host y se crean instancias independientes."
+      "El hipervisor emula todo el hardware y el SO invitado no necesita ninguna modificación.",
+      "Los invitados comparten el kernel del host y se crean instancias independientes y aisladas."
     ],
     c: 0,
     e: "En paravirtualización el hipervisor no emula necesariamente todo el hardware: ofrece hypercalls y el SO invitado debe estar modificado para aprovecharlas. Es una colaboración entre SO e hipervisor."
@@ -143,9 +147,9 @@ const BANK_T2 = [
     id: "t2-14", t: "T2", k: "Teoría",
     q: "¿Qué caracteriza a la virtualización completa?",
     o: [
-      "Exige modificar el SO invitado para que use hypercalls del hipervisor.",
+      "Exige modificar el SO invitado para que use las hypercalls que ofrece el hipervisor.",
       "No requiere que los SO invitados colaboren con el hipervisor ni que se modifiquen.",
-      "Solo funciona con Linux porque aprovecha el kernel del host."
+      "Solo funciona con Linux porque aprovecha el kernel del sistema anfitrión."
     ],
     c: 1,
     e: "La virtualización completa es similar a la paravirtualización, pero no requiere que los SO invitados colaboren ni se modifiquen. El hipervisor se encarga de todo."
@@ -154,9 +158,9 @@ const BANK_T2 = [
     id: "t2-15", t: "T2", k: "Teoría",
     q: "¿Qué es la virtualización a nivel de sistema operativo?",
     o: [
-      "Los SO de las VM comparten el mismo kernel que el SO host, creándose instancias independientes.",
+      "Los SO de las VM comparten el kernel del host y se crean instancias independientes.",
       "Cada VM tiene su propio kernel y hardware simulado, pero comparte las aplicaciones.",
-      "Solo virtualiza el escritorio remoto y no permite ejecutar servicios."
+      "Solo virtualiza el escritorio remoto y no permite ejecutar servicios en el servidor."
     ],
     c: 0,
     e: "En la virtualización de SO los invitados comparten el kernel del host y se crean instancias independientes. Es la base de los contenedores; en Linux convierte el núcleo en hipervisor."
@@ -165,9 +169,9 @@ const BANK_T2 = [
     id: "t2-16", t: "T2", k: "Teoría",
     q: "¿Qué es la emulación nativa?",
     o: [
-      "Se emula un tipo de arquitectura en otra y se replica el hardware para ejecutar varias VM concurrentemente.",
-      "Se comparte el kernel del host y se crean contenedores aislados.",
-      "Se ejecuta el mismo SO en el host y en el invitado sin simular hardware."
+      "Se emula una arquitectura en otra y se replica el hardware para ejecutar varias VM a la vez.",
+      "Se comparte el kernel del host y se crean contenedores aislados con sus dependencias.",
+      "Se ejecuta el mismo SO en host e invitado sin simular hardware ni compartir kernel."
     ],
     c: 0,
     e: "La emulación nativa emula una arquitectura en otra y replica el hardware, de modo que varias VM pueden ejecutarse concurrentemente. Es distinta de la paravirtualización y de la virtualización de SO."
@@ -176,9 +180,9 @@ const BANK_T2 = [
     id: "t2-17", t: "T2", k: "Teoría",
     q: "¿Cuál es un ejemplo de virtualización de recursos?",
     o: [
-      "La memoria virtual con swap en Linux.",
-      "La ejecución de una aplicación Java sobre la JVM.",
-      "La creación de un snapshot de VMware para revertir cambios."
+      "La memoria virtual con swap en Linux, que abstrae la memoria física disponible.",
+      "La ejecución de una aplicación Java sobre la JVM, que oculta el sistema operativo.",
+      "La creación de un snapshot de VMware para revertir cambios en una máquina virtual."
     ],
     c: 0,
     e: "La virtualización de recursos abstrae recursos individuales: memoria (swap), red (VPN), entrada/salida, etc. La memoria virtual con swap es el ejemplo clásico."
@@ -187,9 +191,9 @@ const BANK_T2 = [
     id: "t2-18", t: "T2", k: "Teoría",
     q: "¿Cuáles son ejemplos de virtualización de aplicaciones?",
     o: [
-      "Wine, JVM y CLR.",
-      "VMware ESXi y Hyper-V, que virtualizan el hardware completo.",
-      "Ceph y GlusterFS, que virtualizan el almacenamiento distribuido."
+      "Wine, la JVM y CLR, que encapsulan la aplicación y simulan su entorno habitual.",
+      "VMware ESXi y Hyper-V, que virtualizan el hardware completo del servidor.",
+      "Ceph y GlusterFS, que virtualizan el almacenamiento distribuido entre nodos."
     ],
     c: 0,
     e: "La virtualización de aplicaciones encapsula la aplicación para que crea que interactúa con el SO habitual. Ejemplos: Wine (aplicaciones Windows sobre Linux), JVM y CLR (.NET)."
@@ -198,9 +202,9 @@ const BANK_T2 = [
     id: "t2-19", t: "T2", k: "Teoría",
     q: "¿Qué es la virtualización de escritorio?",
     o: [
-      "El escritorio se almacena y ejecuta en un servidor remoto y el usuario accede desde varios dispositivos; Citrix es un ejemplo.",
+      "El escritorio se ejecuta en un servidor remoto y el usuario accede desde varios dispositivos.",
       "Ejecutar el escritorio completo en cada cliente y sincronizar solo los perfiles de usuario.",
-      "Un clúster de alta disponibilidad que replica el escritorio en dos CPDs."
+      "Un clúster de alta disponibilidad que replica el escritorio en dos CPDs distintos."
     ],
     c: 0,
     e: "La virtualización de escritorio abstrae el almacenamiento físico del entorno de escritorio. El escritorio está en un servidor central y se accede remotamente desde ordenadores, móviles, etc. Ejemplo: Citrix."
@@ -210,8 +214,8 @@ const BANK_T2 = [
     q: "¿Cuál de las siguientes es una causa o razón para virtualizar?",
     o: [
       "Hardware de servidores infrautilizado, espacio agotado en el CPD y necesidad de eficiencia energética.",
-      "Tener servidores físicos perfectamente utilizados y espacio de sobra en el CPD.",
-      "Reducir el número de aplicaciones y eliminar la administración de sistemas."
+      "Tener servidores físicos perfectamente utilizados y espacio de sobra en el CPD y en la sala.",
+      "Reducir el número de aplicaciones y eliminar la administración de sistemas y de usuarios de la red completa."
     ],
     c: 0,
     e: "La virtualización responde a la infrautilización del hardware, la falta de espacio en los CPD, la demanda de eficiencia energética y los costes de administración."
@@ -232,8 +236,8 @@ const BANK_T2 = [
     q: "¿Cómo mejora la virtualización la alta disponibilidad?",
     o: [
       "Si falla un sistema físico, las VM pueden migrarse o distribuirse en caliente a otros sistemas.",
-      "Si falla el host, todas las VM se pierden inevitablemente.",
-      "Solo funciona con VM apagadas, porque no permite migraciones en caliente."
+      "Si falla el host, todas las VM se pierden inevitablemente porque dependen de él.",
+      "Solo funciona con VM apagadas, porque el hipervisor no permite migraciones en caliente."
     ],
     c: 0,
     e: "La virtualización permite migrar o distribuir las VM en caliente a otros hosts si falla uno. También facilita mantener réplicas redundantes sin costes adicionales de hardware."
@@ -253,7 +257,7 @@ const BANK_T2 = [
     id: "t2-24", t: "T2", k: "Teoría",
     q: "¿Cuál es el inconveniente de rendimiento de la virtualización?",
     o: [
-      "Una VM nunca ofrece un rendimiento igual o superior al de ejecutarse directamente sobre el servidor físico.",
+      "Una VM nunca ofrece un rendimiento igual o superior al de ejecutarse directamente sobre el hardware.",
       "Una VM siempre rinde más que el hardware físico porque el hipervisor optimiza los recursos.",
       "El rendimiento es idéntico al físico porque el hipervisor no añade ninguna capa."
     ],
@@ -265,8 +269,8 @@ const BANK_T2 = [
     q: "¿Por qué se dice que el anfitrión es un punto único de fallo?",
     o: [
       "Porque una avería del servidor anfitrión puede tirar múltiples VM y sus servicios.",
-      "Porque cada VM falla de forma independiente y no afecta a las demás.",
-      "Porque el host no necesita monitorización ni redundancia."
+      "Porque cada VM falla de forma independiente y no afecta a las demás del host.",
+      "Porque el host no necesita monitorización ni redundancia si las VM están aisladas."
     ],
     c: 0,
     e: "Varias VM dependen del mismo host. Si el anfitrión falla, todas las VM que contiene pueden caer, con un impacto grande en la organización. Por eso se usan clústeres y alta disponibilidad."
@@ -286,9 +290,9 @@ const BANK_T2 = [
     id: "t2-27", t: "T2", k: "Teoría",
     q: "¿Qué contiene el fichero .vmx de una máquina virtual VMware?",
     o: [
-      "La configuración de la VM en texto plano.",
-      "El estado de la BIOS de la VM y la configuración de arranque.",
-      "El contenido del disco duro virtual y sus snapshots."
+      "La configuración de la VM en texto plano, con dispositivos y opciones de arranque.",
+      "El estado de la BIOS de la VM y la configuración de arranque del firmware virtual.",
+      "El contenido del disco duro virtual y los snapshots que se han creado sobre él."
     ],
     c: 0,
     e: "El .vmx es el fichero raíz de configuración, en texto plano, y almacena la configuración de la máquina virtual. El estado de la BIOS está en .nvram."
@@ -297,9 +301,9 @@ const BANK_T2 = [
     id: "t2-28", t: "T2", k: "Teoría",
     q: "¿Qué almacena el fichero .nvram?",
     o: [
-      "El estado de la BIOS de la máquina virtual.",
-      "La configuración de red del host y las rutas estáticas.",
-      "Los metadatos de los snapshots y el estado completo de la VM."
+      "El estado de la BIOS de la máquina virtual y sus parámetros de arranque.",
+      "La configuración de red del host y las rutas estáticas que utiliza el hipervisor.",
+      "Los metadatos de los snapshots y el estado completo de la máquina virtual."
     ],
     c: 0,
     e: "El .nvram almacena el estado de la BIOS de la VM y se sitúa en el mismo directorio que el .vmx. Los metadatos de snapshots están en .vmsd."
@@ -319,9 +323,9 @@ const BANK_T2 = [
     id: "t2-30", t: "T2", k: "Teoría",
     q: "¿Qué almacena el fichero .vmsd?",
     o: [
-      "Información y metadatos sobre los snapshots.",
-      "El estado completo de la VM en el momento del snapshot.",
-      "El estado de la BIOS y la configuración del hardware virtual."
+      "Información y metadatos sobre los snapshots creados en la máquina virtual.",
+      "El estado completo de la VM en el momento exacto en que se creó el snapshot.",
+      "El estado de la BIOS y la configuración del hardware virtual de la máquina."
     ],
     c: 0,
     e: "El .vmsd centraliza información y metadatos sobre los snapshots y se guarda en el directorio de trabajo. El estado de la VM en el snapshot está en .vmsn."
@@ -330,9 +334,9 @@ const BANK_T2 = [
     id: "t2-31", t: "T2", k: "Teoría",
     q: "¿Qué caracteriza el nivel II de convergencia (infraestructura convergente)?",
     o: [
-      "Añade una capa de virtualización a los sistemas integrados, permitiendo que las capas inferiores converjan.",
-      "Elimina el hipervisor y las VM para ejecutar todo sobre hardware físico.",
-      "Es la nube pública de AWS, que sustituye al CPD tradicional."
+      "Añade una capa de virtualización a los sistemas integrados, manteniendo la arquitectura inferior.",
+      "Elimina el hipervisor y las VM para ejecutar todo directamente sobre el hardware físico.",
+      "Es la nube pública de AWS, que sustituye por completo al CPD tradicional de la empresa."
     ],
     c: 0,
     e: "El nivel II integra los tres componentes del nivel I (cómputo, almacenamiento y red) y añade una capa de virtualización, normalmente de un único fabricante. La arquitectura subyacente sigue siendo la misma."
@@ -341,7 +345,7 @@ const BANK_T2 = [
     id: "t2-32", t: "T2", k: "Teoría",
     q: "¿Qué caracteriza el nivel III de convergencia (infraestructura hiperconvergente)?",
     o: [
-      "Integra servidores, almacenamiento y red; elimina switches y controladoras; usa almacenamiento definido por software y local en cada nodo.",
+      "Integra servidores, almacenamiento y red; elimina switches y controladoras y usa SDS local.",
       "Mantiene obligatoriamente una SAN centralizada y añade una capa de virtualización.",
       "Solo añade una capa de virtualización a un sistema integrado, sin cambiar el almacenamiento."
     ],
@@ -352,9 +356,9 @@ const BANK_T2 = [
     id: "t2-33", t: "T2", k: "Teoría",
     q: "En una operación de escritura en un clúster hiperconvergente, ¿qué ocurre?",
     o: [
-      "La VM solicita la escritura, el hipervisor la redirige al controlador, este la guarda en la flash local y el dato se replica en varios nodos.",
-      "La VM escribe directamente en una SAN central y el controlador replica el dato.",
-      "La escritura se guarda solo en el disco local del usuario y no se replica."
+      "La VM escribe, el hipervisor redirige al controlador, este guarda en flash local y replica el dato.",
+      "La VM escribe directamente en una SAN central y el controlador replica el dato en otro CPD.",
+      "La escritura se guarda solo en el disco local del usuario y no se replica en ningún nodo."
     ],
     c: 0,
     e: "El hipervisor redirige la escritura al controlador, que la almacena en el disco flash local y replica el dato en múltiples nodos. Así se combina rendimiento local con tolerancia a fallos."
@@ -363,9 +367,9 @@ const BANK_T2 = [
     id: "t2-34", t: "T2", k: "Teoría",
     q: "¿Cómo gestiona la hiperconvergencia las lecturas?",
     o: [
-      "Los datos más solicitados se mantienen en flash; los menos usados se mueven a discos mecánicos y vuelven a flash si se solicitan de nuevo.",
-      "Todos los datos se guardan siempre en cintas y se leen secuencialmente.",
-      "Solo se lee de una SAN central y la flash se usa únicamente para escrituras."
+      "Los datos calientes se mantienen en flash; los fríos pasan a discos y vuelven si se solicitan.",
+      "Todos los datos se guardan siempre en cintas y se leen de forma secuencial para ahorrar espacio en flash.",
+      "Solo se lee de una SAN central y la flash se usa únicamente para las operaciones de escritura."
     ],
     c: 0,
     e: "La hiperconvergencia coloca los datos calientes en flash y mueve los fríos a discos mecánicos. Si un dato vuelve a solicitarse con frecuencia, se migra de nuevo a flash. Es una gestión automática por uso."
@@ -374,9 +378,9 @@ const BANK_T2 = [
     id: "t2-35", t: "T2", k: "Teoría",
     q: "En AWS, ¿qué es una Availability Zone (AZ)?",
     o: [
-      "Un grupo de CPDs dentro de una región.",
-      "Una región geográfica completa que agrupa varios países.",
-      "Un único servidor físico dentro de un CPD."
+      "Un grupo de CPDs dentro de una región, separados para evitar fallos comunes.",
+      "Una región geográfica completa que agrupa varios países y sus centros de datos.",
+      "Un único servidor físico dentro de un CPD que aloja varias máquinas virtuales."
     ],
     c: 0,
     e: "Una región es un área geográfica independiente. Una Availability Zone es un grupo de CPDs dentro de una región. Las aplicaciones suelen distribuirse entre varias AZ para ganar disponibilidad."
@@ -384,7 +388,11 @@ const BANK_T2 = [
   {
     id: "t2-36", t: "T2", k: "Teoría",
     q: "¿Qué servicio de AWS se utiliza para almacenamiento de objetos?",
-    o: ["S3", "EC2, porque ofrece almacenamiento elástico de bloques", "VPC, porque gestiona los objetos dentro de la red privada"],
+    o: [
+      "S3, porque es el servicio de almacenamiento de objetos de AWS.",
+      "EC2, porque ofrece almacenamiento elástico de bloques para instancias.",
+      "VPC, porque gestiona los objetos dentro de la red privada virtual."
+    ],
     c: 0,
     e: "S3 (Simple Storage Service) es almacenamiento de objetos. EC2 es cómputo elástico y VPC es una red privada virtual."
   },
@@ -394,7 +402,7 @@ const BANK_T2 = [
     o: [
       "Los contenedores son procesos que comparten el kernel y no son mini máquinas virtuales.",
       "Los contenedores tienen su propio kernel y hardware simulado, como una VM ligera.",
-      "Los contenedores siempre son más pesados porque incluyen un SO completo."
+      "Los contenedores siempre son más pesados porque incluyen un SO completo y sus controladores."
     ],
     c: 0,
     e: "Los contenedores no son mini VM: son procesos limitados a los recursos que pueden acceder, comparten el mismo kernel y se ejecutan directamente en la máquina host. Acaban cuando termina el proceso."
@@ -403,9 +411,9 @@ const BANK_T2 = [
     id: "t2-38", t: "T2", k: "Caso práctico",
     q: "Una empresa necesita ejecutar varios servicios aislados, pero con la máxima densidad posible en el mismo hardware y sin el coste de un SO completo por servicio. ¿Qué encaja mejor?",
     o: [
-      "Contenedores, porque comparten el kernel y son más ligeros que las VM.",
-      "Máquinas virtuales con un hipervisor de tipo 1, porque siempre son más ligeras.",
-      "Máquinas virtuales con un hipervisor de tipo 2, porque comparten el kernel del host."
+      "Contenedores, porque comparten el kernel del host y ofrecen más densidad que las VM.",
+      "Máquinas virtuales con hipervisor de tipo 1, porque siempre son más ligeras que un contenedor.",
+      "Máquinas virtuales con hipervisor de tipo 2, porque comparten el kernel del host."
     ],
     c: 0,
     e: "Los contenedores comparten kernel y son ligeros, lo que permite alta densidad. Las VM ofrecen mayor aislamiento pero incluyen un SO completo y son más pesadas."

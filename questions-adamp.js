@@ -4,8 +4,8 @@ const BANK_ADAMP = [
     id: "ad-01", t: "ADAMP", s: "3.1 Bloques y dominios", k: "Teoría",
     q: "En Active Directory, ¿qué es un bosque?",
     o: [
-      "Una agrupación de uno o más árboles de dominio que comparten un único esquema y relaciones de confianza entre sus raíces.",
-      "Un conjunto de dominios que comparten un espacio de nombres contiguo y descienden de un mismo dominio raíz.",
+      "Una agrupación de árboles que comparten un esquema único y confianzas entre sus raíces.",
+      "Un conjunto de dominios que comparten un espacio de nombres contiguo y un mismo raíz.",
       "Una unidad organizativa de primer nivel que agrupa objetos y delega su administración."
     ],
     c: 0,
@@ -26,9 +26,9 @@ const BANK_ADAMP = [
     id: "ad-03", t: "ADAMP", s: "3.1 Bloques y dominios", k: "Teoría",
     q: "¿Qué diferencia a un árbol de dominio de un bosque?",
     o: [
-      "El árbol agrupa dominios con un espacio de nombres continuo; el bosque puede agrupar varios árboles con nombres no continuos.",
+      "El árbol agrupa dominios con un espacio de nombres continuo; el bosque reúne varios árboles con nombres distintos.",
       "El árbol agrupa dominios con nombres no continuos; el bosque exige que todos compartan el mismo sufijo DNS.",
-      "El árbol es una OU de nivel superior y el bosque es el conjunto de OU de un dominio."
+      "El árbol es una OU de nivel superior y el bosque es el conjunto de OU de un mismo dominio."
     ],
     c: 0,
     e: "Un árbol se forma con dominios que comparten un espacio de nombres continuo, por ejemplo us.nextinfo.priv y es.nextinfo.priv bajo nextinfo.priv. Un bosque puede reunir varios árboles con espacios de nombres distintos."
@@ -37,9 +37,9 @@ const BANK_ADAMP = [
     id: "ad-04", t: "ADAMP", s: "3.1 Bloques y dominios", k: "Teoría",
     q: "¿Qué es el dominio raíz del bosque?",
     o: [
-      "El primer dominio instalado en el bosque, que actúa como raíz de la jerarquía y alberga los grupos administrativos del bosque.",
+      "El primer dominio instalado, que actúa como raíz de la jerarquía y alberga los grupos administrativos.",
       "El dominio con mayor número de usuarios, elegido automáticamente al crear el segundo árbol.",
-      "El único dominio que puede contener un controlador de dominio de solo lectura."
+      "El único dominio que puede contener un controlador de dominio de solo lectura y sus réplicas."
     ],
     c: 0,
     e: "El primer dominio instalado es el dominio raíz del bosque. Es la raíz de la jerarquía y en él se ubican grupos como Administradores de empresa y Administradores del esquema."
@@ -48,7 +48,7 @@ const BANK_ADAMP = [
     id: "ad-05", t: "ADAMP", s: "3.1 Bloques y dominios", k: "Teoría",
     q: "¿Para qué sirven las relaciones de confianza entre dominios?",
     o: [
-      "Para permitir que usuarios de un dominio se autentiquen y accedan a recursos de otro sin duplicar cuentas.",
+      "Permitir que usuarios de un dominio accedan a recursos de otro sin duplicar cuentas.",
       "Para replicar automáticamente la base de datos de seguridad de un dominio en todos los demás.",
       "Para convertir varios dominios en una única OU con las mismas directivas."
     ],
@@ -59,9 +59,9 @@ const BANK_ADAMP = [
     id: "ad-06", t: "ADAMP", s: "3.1 Bloques y dominios", k: "Teoría",
     q: "¿Qué afirmación es correcta sobre el esquema de un bosque?",
     o: [
-      "Es único en el bosque y todos los controladores de dominio tienen una réplica; solo el maestro de esquema puede modificarlo.",
-      "Cada dominio mantiene su propio esquema independiente y los cambios se replican solo dentro de ese dominio.",
-      "Todos los controladores de dominio pueden modificar el esquema directamente, sin un rol especializado."
+      "Es único en el bosque, todos los DC tienen una réplica y solo el maestro de esquema puede cambiarlo.",
+      "Cada dominio mantiene su propio esquema independiente y los cambios se replican solo dentro de él.",
+      "Todos los controladores de dominio pueden modificar el esquema directamente, sin rol especializado."
     ],
     c: 0,
     e: "El esquema es único en el bosque. Todos los DC tienen una réplica de solo lectura y únicamente el controlador con el rol de maestro de esquema puede realizar cambios."
@@ -70,9 +70,9 @@ const BANK_ADAMP = [
     id: "ad-07", t: "ADAMP", s: "3.1 Bloques y dominios", k: "Caso práctico",
     q: "Una empresa matriz usa el dominio nextinfo.priv y compra otra compañía con el dominio otraempresa.com. Deciden mantener ambos nombres, compartir un único esquema y establecer confianzas. ¿Qué estructura han creado?",
     o: [
-      "Un bosque con dos árboles de dominio.",
-      "Un único árbol con dos dominios secundarios del mismo espacio de nombres.",
-      "Un grupo de trabajo con dos dominios locales independientes."
+      "Un bosque con dos árboles de dominio, uno por cada espacio de nombres independiente.",
+      "Un único árbol con dos dominios secundarios que comparten el mismo espacio de nombres.",
+      "Un grupo de trabajo con dos dominios locales independientes y sin esquema compartido."
     ],
     c: 0,
     e: "Al mantener espacios de nombres no continuos dentro de una misma estructura con un esquema compartido y confianzas, se crea un bosque con dos árboles. Un árbol exigiría un espacio de nombres continuo."
@@ -81,9 +81,9 @@ const BANK_ADAMP = [
     id: "ad-08", t: "ADAMP", s: "3.1 Bloques y dominios", k: "Teoría",
     q: "¿Cuál es la función del dominio como perímetro de seguridad?",
     o: [
-      "Definir el ámbito en el que se aplican las directivas y se administran los objetos, sin que las ACL de un dominio se compartan automáticamente con otro.",
-      "Impedir que un usuario de un dominio pueda autenticarse en cualquier otro dominio del mismo bosque.",
-      "Sustituir al bosque como límite máximo de confianza y eliminar la necesidad de relaciones de confianza."
+      "Delimitar el ámbito de las directivas y la administración, sin compartir ACL automáticamente.",
+      "Impedir que un usuario de un dominio pueda autenticarse en cualquier otro dominio del bosque.",
+      "Sustituir al bosque como límite máximo de confianza y eliminar las relaciones de confianza."
     ],
     c: 0,
     e: "El dominio delimita la aplicación de directivas y la administración de objetos. Las ACL y derechos no se comparten automáticamente entre dominios; para atravesar esa frontera se usan confianzas."
@@ -93,8 +93,8 @@ const BANK_ADAMP = [
     q: "¿Sobre qué arquitectura de directorio se construyen los Servicios de dominio de Active Directory (AD DS)?",
     o: [
       "LDAP (Lightweight Directory Access Protocol), accesible mediante TCP/IP.",
-      "Kerberos, que actúa como base de datos jerárquica del directorio.",
-      "DNS, que almacena los objetos y atributos del dominio."
+      "Kerberos, que actúa como base de datos jerárquica y almacena los objetos del directorio.",
+      "DNS, que almacena los objetos y atributos del dominio y autentica a los usuarios."
     ],
     c: 0,
     e: "AD DS se basa en una arquitectura de directorio LDAP accesible por TCP/IP. Kerberos es el protocolo de autenticación predeterminado y DNS se usa para localizar servicios, no para almacenar los objetos del directorio."
@@ -125,9 +125,9 @@ const BANK_ADAMP = [
     id: "ad-12", t: "ADAMP", s: "3.2 Presentación de AD", k: "Teoría",
     q: "¿Qué papel cumple el archivo edb.log en un controlador de dominio?",
     o: [
-      "Almacena las últimas transacciones que todavía no se han integrado en ntds.dit; tiene un tamaño fijo de 10 MB.",
-      "Es el punto de control que indica qué transacciones ya se han confirmado en la base de datos.",
-      "Es la copia de seguridad completa del directorio que se replica entre controladores."
+      "Almacena las transacciones pendientes de integrar en ntds.dit; tiene un tamaño fijo de 10 MB.",
+      "Es el punto de control que marca las transacciones ya confirmadas en la base de datos.",
+      "Es la copia de seguridad completa del directorio que se replica entre todos los controladores."
     ],
     c: 0,
     e: "Las modificaciones se escriben primero en edb.log y después se integran en ntds.dit. El archivo tiene un tamaño fijo de 10 MB. El punto de control es edb.chk."
@@ -158,7 +158,7 @@ const BANK_ADAMP = [
     id: "ad-15", t: "ADAMP", s: "3.2 Presentación de AD", k: "Teoría",
     q: "¿Para qué se utilizan las RSAT (Remote Server Administration Tools)?",
     o: [
-      "Para instalar las consolas de administración de AD en un equipo cliente que no ejecuta el rol AD DS.",
+      "Para instalar las consolas de administración de AD en un equipo cliente sin el rol AD DS.",
       "Para convertir un equipo cliente en controlador de dominio de solo lectura.",
       "Para replicar la base de datos ntds.dit entre dominios sin usar controladores de dominio."
     ],
@@ -169,9 +169,9 @@ const BANK_ADAMP = [
     id: "ad-16", t: "ADAMP", s: "3.2 Presentación de AD", k: "Teoría",
     q: "¿Qué contiene la partición de configuración de Active Directory?",
     o: [
-      "La información sobre dominios, sitios, programación de replicaciones y topología del bosque.",
-      "Las clases de objetos y atributos que se pueden crear en el directorio.",
-      "Todos los objetos de usuario, grupo y equipo de un dominio concreto."
+      "La información sobre dominios, sitios, programación de replicación y topología del bosque.",
+      "Las clases de objetos y atributos que se pueden crear y modificar en el directorio.",
+      "Todos los objetos de usuario, grupo y equipo que pertenecen a un dominio concreto."
     ],
     c: 0,
     e: "La partición de configuración es única en el bosque y describe dominios, sitios, replicación y topología. El esquema define clases y atributos; la partición de dominio contiene los objetos de ese dominio."
@@ -181,7 +181,7 @@ const BANK_ADAMP = [
     q: "¿Qué afirmación describe correctamente la partición de esquema?",
     o: [
       "Es única en el bosque, se replica en todos los DC y solo el maestro de esquema puede modificarla.",
-      "Es propia de cada dominio y cada dominio puede definir clases de objetos distintas.",
+      "Es propia de cada dominio, que puede definir sus propias clases de objetos y atributos independientes.",
       "Se replica solo en el dominio raíz y los demás dominios la consultan por LDAP."
     ],
     c: 0,
@@ -202,8 +202,8 @@ const BANK_ADAMP = [
     id: "ad-19", t: "ADAMP", s: "3.2 Presentación de AD", k: "Teoría",
     q: "¿Qué es un SPN y cuándo hay que registrarlo manualmente?",
     o: [
-      "Un nombre principal de servicio que identifica una instancia de servicio; si el servicio usa una cuenta de dominio, debe registrarse con setspn.",
-      "Un grupo de seguridad del dominio que autoriza el acceso Kerberos y se crea automáticamente con cada servicio.",
+      "Un nombre principal de servicio que identifica una instancia; con cuenta de dominio se registra manualmente.",
+      "Un grupo de seguridad del dominio que autoriza el acceso Kerberos y se crea automáticamente con cada servicio nuevo.",
       "Un registro DNS que sustituye al TGT y permite al cliente saltarse la autenticación del KDC."
     ],
     c: 0,
@@ -213,9 +213,9 @@ const BANK_ADAMP = [
     id: "ad-20", t: "ADAMP", s: "3.2 Presentación de AD", k: "Teoría",
     q: "¿Qué requisito y limitación tiene la papelera de reciclaje de Active Directory?",
     o: [
-      "Requiere elevar el nivel funcional del bosque a Windows Server 2008 R2 como mínimo y, una vez activada, no se puede desactivar.",
+      "Requiere elevar el nivel funcional del bosque a 2008 R2 y, una vez activada, no se puede desactivar.",
       "Se puede activar en cualquier nivel funcional y desactivar cuando se quiera sin perder objetos.",
-      "Solo está disponible en dominios con nivel funcional Windows Server 2016 y se desactiva al reiniciar el DC."
+      "Solo está disponible en dominios con nivel funcional 2016 y se desactiva al reiniciar el DC."
     ],
     c: 0,
     e: "La papelera de reciclaje requiere al menos el nivel funcional de bosque Windows Server 2008 R2. Una vez activada no se puede deshabilitar; los objetos eliminados se recuperan desde el contenedor Deleted Objects."
@@ -224,9 +224,9 @@ const BANK_ADAMP = [
     id: "ad-21", t: "ADAMP", s: "3.2 Presentación de AD", k: "Teoría",
     q: "¿Qué consola se abre con el comando dsa.msc?",
     o: [
-      "Usuarios y equipos de Active Directory.",
-      "Centro de administración de Active Directory (ADAC).",
-      "Sitios y servicios de Active Directory."
+      "Usuarios y equipos de Active Directory, para administrar cuentas y equipos del dominio.",
+      "Centro de administración de Active Directory (ADAC), para tareas de administración avanzada.",
+      "Sitios y servicios de Active Directory, para la topología física y la replicación."
     ],
     c: 0,
     e: "dsa.msc abre Usuarios y equipos de Active Directory. ADAC es una consola distinta y Sitios y servicios se usa para la topología física y la replicación."
@@ -236,8 +236,8 @@ const BANK_ADAMP = [
     q: "¿Qué comando de PowerShell crea una unidad organizativa llamada Servidores dentro de OU=NEXTINFO,DC=Nextinfo,DC=priv?",
     o: [
       "New-ADOrganizationalUnit -Name Servidores -Path \"OU=NEXTINFO,DC=Nextinfo,DC=priv\"",
-      "New-ADUser -Name Servidores -Path \"OU=NEXTINFO,DC=Nextinfo,DC=priv\"",
-      "New-ADGroup -Name Servidores -Path \"OU=NEXTINFO,DC=Nextinfo,DC=priv\""
+      "New-ADUser -Name Servidores -Path \"OU=NEXTINFO,DC=Nextinfo,DC=priv\" -Verbose",
+      "New-ADGroup -Name Servidores -Path \"OU=NEXTINFO,DC=Nextinfo,DC=priv\" -Verbose"
     ],
     c: 0,
     e: "New-ADOrganizationalUnit crea una OU. New-ADUser crea una cuenta de usuario y New-ADGroup un grupo; ninguna de las dos crea un contenedor organizativo."
@@ -268,9 +268,9 @@ const BANK_ADAMP = [
     id: "ad-25", t: "ADAMP", s: "3.3 Controladores de dominio", k: "Teoría",
     q: "¿Qué dos roles FSMO son exclusivos del bosque?",
     o: [
-      "Maestro de esquema y maestro de nomenclatura de dominios.",
-      "Maestro RID y emulador PDC.",
-      "Maestro de infraestructura y emulador PDC."
+      "Maestro de esquema y maestro de nomenclatura, exclusivos del bosque.",
+      "Maestro RID y emulador PDC, que son exclusivos de cada dominio.",
+      "Maestro de infraestructura y emulador PDC, exclusivos de cada dominio."
     ],
     c: 0,
     e: "El maestro de esquema y el maestro de nomenclatura de dominios son únicos en el bosque. RID, infraestructura y PDC son únicos en cada dominio."
@@ -279,8 +279,8 @@ const BANK_ADAMP = [
     id: "ad-26", t: "ADAMP", s: "3.3 Controladores de dominio", k: "Teoría",
     q: "¿Qué tres roles FSMO son exclusivos de cada dominio?",
     o: [
-      "Maestro RID, maestro de infraestructura y emulador PDC.",
-      "Maestro de esquema, maestro RID y maestro de infraestructura.",
+      "Maestro RID, maestro de infraestructura y emulador PDC en cada dominio.",
+      "Maestro de esquema, maestro RID y maestro de infraestructura en cada dominio.",
       "Maestro de nomenclatura de dominios, emulador PDC y maestro de esquema."
     ],
     c: 0,
@@ -290,8 +290,8 @@ const BANK_ADAMP = [
     id: "ad-27", t: "ADAMP", s: "3.3 Controladores de dominio", k: "Teoría",
     q: "¿Qué función tiene el maestro de esquema?",
     o: [
-      "Ser el único controlador que puede modificar el esquema; debe estar incluido en un DC que actúe como catálogo global.",
-      "Asignar los grupos de RID a los controladores para que generen SID únicos.",
+      "Ser el único controlador que puede modificar el esquema y residir en un catálogo global.",
+      "Asignar los grupos de RID a los controladores para que generen identificadores SID únicos.",
       "Gestionar los cambios de contraseña y el bloqueo de cuentas del dominio."
     ],
     c: 0,
@@ -301,9 +301,9 @@ const BANK_ADAMP = [
     id: "ad-28", t: "ADAMP", s: "3.3 Controladores de dominio", k: "Teoría",
     q: "¿Para qué sirve el maestro de nomenclatura de dominios?",
     o: [
-      "Para agregar o eliminar dominios del bosque; debe estar accesible y residir en un catálogo global.",
-      "Para crear y eliminar unidades organizativas dentro de un dominio.",
-      "Para controlar la replicación entre sitios y los servidores puente."
+      "Agregar o eliminar dominios del bosque; debe residir en un catálogo global.",
+      "Crear y eliminar unidades organizativas dentro de un dominio y delegar su administración.",
+      "Controlar la replicación entre sitios y los servidores puente que la conectan."
     ],
     c: 0,
     e: "El maestro de nomenclatura de dominios gestiona la incorporación y eliminación de dominios en el bosque. Si no está accesible, la operación falla; debe estar en un catálogo global."
@@ -325,7 +325,7 @@ const BANK_ADAMP = [
     o: [
       "Con actualizar las referencias a usuarios de otros dominios dentro de los grupos locales de su dominio.",
       "Con la creación de nuevos dominios y la comprobación de que su nombre DNS no está repetido.",
-      "Con la emisión de tiques Kerberos y la sincronización horaria del dominio."
+      "Con la emisión de tiques Kerberos, la sincronización horaria y la autenticación de los usuarios del dominio."
     ],
     c: 0,
     e: "El maestro de infraestructura actualiza la lista de miembros de grupos cuando los usuarios provienen de otro dominio. No crea dominios ni emite tiques Kerberos."
@@ -334,7 +334,7 @@ const BANK_ADAMP = [
     id: "ad-31", t: "ADAMP", s: "3.3 Controladores de dominio", k: "Teoría",
     q: "¿Cuál de estas funciones corresponde al emulador PDC?",
     o: [
-      "Gestionar las actualizaciones de contraseñas, el bloqueo de cuentas y proporcionar el reloj principal del dominio.",
+      "Gestionar contraseñas y bloqueos de cuenta y actuar como reloj principal del dominio.",
       "Asignar bloques de RID y mantener el identificador único de los objetos nuevos.",
       "Modificar el esquema y autorizar la instalación de nuevas clases de objetos."
     ],
@@ -345,7 +345,7 @@ const BANK_ADAMP = [
     id: "ad-32", t: "ADAMP", s: "3.3 Controladores de dominio", k: "Teoría",
     q: "¿Qué es el catálogo global?",
     o: [
-      "Una réplica parcial de todos los objetos del bosque que permite localizarlos y autenticar inicios de sesión interdominio.",
+      "Una réplica parcial de los objetos del bosque que permite localizarlos y autenticar sesiones.",
       "Una copia completa de la partición de dominio de cada dominio, replicada en todos los DC del bosque.",
       "La partición que contiene únicamente el esquema y la topología de replicación del bosque."
     ],
@@ -389,8 +389,8 @@ const BANK_ADAMP = [
     id: "ad-36", t: "ADAMP", s: "3.3 Controladores de dominio", k: "Teoría",
     q: "¿Qué caracteriza a un RODC frente a un DC en escritura?",
     o: [
-      "Mantiene una copia de solo lectura del directorio, se orienta a sucursales y no se recomienda para tolerancia a fallos.",
-      "Puede alojar cualquier rol FSMO y modificar el esquema del bosque.",
+      "Mantiene una copia de solo lectura, se orienta a sucursales y no sirve para tolerancia a fallos.",
+      "Puede alojar cualquier rol FSMO, modificar el esquema del bosque y autenticar como un DC normal.",
       "Es el único controlador que puede autenticar usuarios de otros dominios del bosque."
     ],
     c: 0,
@@ -400,9 +400,9 @@ const BANK_ADAMP = [
     id: "ad-37", t: "ADAMP", s: "3.4 Niveles funcionales", k: "Teoría",
     q: "¿Qué determinan los niveles funcionales de dominio y bosque?",
     o: [
-      "Las funcionalidades activas y qué sistemas operativos pueden alojar el rol de controlador de dominio.",
-      "El número máximo de usuarios y equipos que puede contener el dominio.",
-      "La capacidad de almacenamiento y el número de sitios que se pueden crear."
+      "Las funciones disponibles y los sistemas operativos que pueden alojar el rol de DC.",
+      "El número máximo de usuarios y equipos que puede contener un dominio del bosque.",
+      "La capacidad de almacenamiento y el número máximo de sitios que se pueden crear."
     ],
     c: 0,
     e: "Los niveles funcionales determinan las funcionalidades disponibles y los SO que pueden actuar como DC. No fijan cuotas de usuarios, almacenamiento ni número de sitios."
@@ -422,7 +422,7 @@ const BANK_ADAMP = [
     id: "ad-39", t: "ADAMP", s: "3.4 Niveles funcionales", k: "Teoría",
     q: "¿Qué funcionalidad se activa con el nivel funcional de bosque Windows Server 2008?",
     o: [
-      "La implementación de controladores de dominio de solo lectura y la posibilidad de renombrar dominios.",
+      "La implementación de controladores de dominio de solo lectura y el renombrado de dominios.",
       "La papelera de reciclaje de Active Directory para recuperar objetos eliminados.",
       "La caducidad de la pertenencia a grupos, con una duración limitada para cada miembro."
     ],
@@ -444,9 +444,9 @@ const BANK_ADAMP = [
     id: "ad-41", t: "ADAMP", s: "3.4 Niveles funcionales", k: "Teoría",
     q: "¿Qué funcionalidad aporta el nivel funcional de bosque Windows Server 2016?",
     o: [
-      "Definir una caducidad para la pertenencia a un grupo, añadiendo usuarios por un periodo limitado.",
-      "Habilitar la papelera de reciclaje y la recuperación de objetos eliminados.",
-      "Permitir el renombrado de dominios y la conversión de objetos InetOrgPerson."
+      "Definir la caducidad de la pertenencia a un grupo, añadiendo usuarios por tiempo limitado.",
+      "Habilitar la papelera de reciclaje y la recuperación de objetos eliminados del directorio.",
+      "Permitir el renombrado de dominios y la conversión de objetos InetOrgPerson del bosque."
     ],
     c: 0,
     e: "El nivel de bosque 2016 añade la caducidad de la pertenencia a grupos. La papelera es de 2008 R2; el renombrado y la conversión de InetOrgPerson son de 2008."
@@ -455,9 +455,9 @@ const BANK_ADAMP = [
     id: "ad-42", t: "ADAMP", s: "3.4 Niveles funcionales", k: "Teoría",
     q: "¿Cuál de estas funcionalidades corresponde al nivel funcional de dominio Windows Server 2008?",
     o: [
-      "Las directivas de contraseña específicas para grupos de usuarios y el cifrado Kerberos con AES de 128 y 256 bits.",
+      "Las directivas de contraseña por grupo y el cifrado Kerberos AES de 128 y 256 bits.",
       "La papelera de reciclaje del bosque y la caducidad de la pertenencia a grupos.",
-      "La lectura de tokens de AD FS para aplicaciones federadas, introducida en 2008 R2."
+      "La lectura de tokens de AD FS para aplicaciones federadas, introducida en Windows Server 2008 R2."
     ],
     c: 0,
     e: "El nivel de dominio 2008 incluye directivas de contraseña específicas, AES para Kerberos, LastLogonTimestamp, DFS-R para SYSVOL y RODC. La papelera es de bosque 2008 R2 y la lectura de tokens de AD FS es de dominio 2008 R2."
@@ -466,8 +466,8 @@ const BANK_ADAMP = [
     id: "ad-43", t: "ADAMP", s: "3.4 Niveles funcionales", k: "Teoría",
     q: "¿Qué funcionalidad introduce el nivel funcional de dominio Windows Server 2008 R2 en entornos federados?",
     o: [
-      "La lectura del contenido de los tokens de autenticación de AD FS para cada acceso a una aplicación.",
-      "La creación de controladores de dominio de solo lectura y el renombrado de dominios.",
+      "La lectura del contenido de los tokens de AD FS para cada acceso a una aplicación federada.",
+      "La creación de controladores de dominio de solo lectura y el renombrado de dominios del bosque.",
       "La caducidad de la pertenencia a grupos y las directivas de contraseña específicas."
     ],
     c: 0,
@@ -499,9 +499,9 @@ const BANK_ADAMP = [
     id: "ad-46", t: "ADAMP", s: "3.4 Niveles funcionales", k: "Teoría",
     q: "¿Por qué el documento no desarrolla el nivel funcional Windows Server 2003?",
     o: [
-      "Porque ha desaparecido del soporte y solo garantiza compatibilidad con versiones antiguas, sin funciones propias que justifiquen su uso en producción.",
-      "Porque Windows Server 2016 no puede instalarlo y no permite crear dominios con ese nivel.",
-      "Porque ese nivel solo existe para bosques, no para dominios."
+      "Porque ha quedado fuera de soporte y solo aporta compatibilidad con versiones antiguas.",
+      "Porque Windows Server 2016 no puede instalarlo ni crear dominios con ese nivel.",
+      "Porque ese nivel solo existe para bosques y no se puede aplicar a dominios."
     ],
     c: 0,
     e: "El nivel 2003 ha quedado fuera por el fin del ciclo de vida y solo aporta compatibilidad con versiones anteriores. No tiene sentido usarlo en producción con Windows Server 2016."
@@ -510,9 +510,9 @@ const BANK_ADAMP = [
     id: "ad-47", t: "ADAMP", s: "Replicación y GPO", k: "Teoría",
     q: "En la replicación intra-sitio, ¿cada cuánto notifica un controlador de dominio un cambio a sus socios?",
     o: [
-      "Cada 15 segundos, con una pausa de 3 segundos entre notificaciones para evitar respuestas simultáneas.",
-      "Cada 3 segundos, con una pausa de 15 segundos entre notificaciones.",
-      "Cada 180 minutos, con una pausa de 15 minutos entre notificaciones."
+      "Cada 15 segundos, con una pausa de 3 segundos para evitar respuestas simultáneas.",
+      "Cada 3 segundos, con una pausa de 15 segundos entre notificaciones a los socios.",
+      "Cada 180 minutos, con una pausa de 15 minutos entre notificaciones a los socios."
     ],
     c: 0,
     e: "Dentro del mismo sitio, el DC notifica el cambio a sus socios cada 15 segundos y espera 3 segundos entre notificaciones. Los 180 minutos y los 15 minutos corresponden a la replicación entre sitios."
@@ -544,7 +544,7 @@ const BANK_ADAMP = [
     q: "¿Qué función tienen los servidores puente (bridgehead servers) en la replicación entre sitios?",
     o: [
       "Gestionan el tráfico de replicación entre sitios, por lo que su rendimiento es crucial.",
-      "Autentican a los usuarios de sucursales y almacenan sus contraseñas en caché.",
+      "Autentican a los usuarios de las sucursales y almacenan sus contraseñas en la caché local.",
       "Sustituyen al catálogo global en los dominios que no tienen conectividad WAN."
     ],
     c: 0,
@@ -565,9 +565,9 @@ const BANK_ADAMP = [
     id: "ad-52", t: "ADAMP", s: "Replicación y GPO", k: "Teoría",
     q: "¿Cada cuánto actualizan los clientes Windows sus GPO en segundo plano?",
     o: [
-      "Cada 90 minutos, con un desfase aleatorio de hasta 30 minutos.",
-      "Cada 15 minutos, sin desfase aleatorio.",
-      "Cada 180 minutos, con un desfase de hasta 15 minutos."
+      "Cada 90 minutos, con un desfase aleatorio de hasta 30 minutos para no saturar la red.",
+      "Cada 15 minutos, sin desfase aleatorio, coincidiendo con la replicación intra-sitio.",
+      "Cada 180 minutos, con un desfase de hasta 15 minutos, igual que entre sitios."
     ],
     c: 0,
     e: "La actualización en segundo plano de GPO se produce cada 90 minutos, con un desfase aleatorio de hasta 30 minutos para no saturar la red. Un reinicio o inicio de sesión también fuerza la actualización."
@@ -598,7 +598,7 @@ const BANK_ADAMP = [
     id: "ad-55", t: "ADAMP", s: "Replicación y GPO", k: "Teoría",
     q: "¿Qué limitación existe en la actualización en segundo plano de las GPO?",
     o: [
-      "No todas las políticas se aplican en segundo plano: algunas, como la instalación de software, requieren reinicio o inicio de sesión.",
+      "No todas las políticas se aplican en segundo plano: algunas requieren reinicio o inicio de sesión.",
       "Todas las políticas se aplican siempre en segundo plano, sin excepciones ni necesidad de reiniciar.",
       "Solo se actualizan las políticas de usuario; las de equipo nunca se actualizan en segundo plano."
     ],
