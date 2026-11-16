@@ -8,6 +8,26 @@ const TOPICS = {
   CLUSTERS: { label: "Clústers y tecnologías",           short: "Clústers", color: "#ec4899" }
 };
 
+/* Secciones dirigidas: filtran por el subtema (campo s) */
+const SECTIONS = [
+  {
+    id: "HPC vs HTC",
+    label: "HPC vs HTC",
+    badge: "HPC vs HTC",
+    topic: "CLUSTERS",
+    color: "#ec4899",
+    desc: "Casos prácticos para decidir entre alto rendimiento y alto throughput."
+  },
+  {
+    id: "Replicación y GPO",
+    label: "Tiempos AD",
+    badge: "Tiempos AD",
+    topic: "ADAMP",
+    color: "#8b5cf6",
+    desc: "Replicación de la base de datos y actualización de directivas."
+  }
+];
+
 const BANK = [
   ...BANK_T1,
   ...BANK_T2,

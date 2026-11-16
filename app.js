@@ -179,6 +179,30 @@
     }
   }
 
+  function renderSectionPicker() {
+    const picker = $("#sectionPicker");
+    if (!picker) return;
+    picker.innerHTML = "";
+    for (const section of SECTIONS) {
+      const count = BANK.filter((q) => q.s === section.id).length;
+      if (!count) continue;
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "section-btn";
+      btn.dataset.section = section.id;
+      btn.title = section.desc;
+      btn.innerHTML = `
+        <span class="section-dot" style="background:${section.color}"></span>
+        <span class="section-copy">
+          <strong>${esc(section.label)}</strong>
+          <small>${count} preguntas · ${esc(section.desc)}</small>
+        </span>
+        <span class="section-arrow">→</span>`;
+      btn.addEventListener("click", () => startSection(section));
+      picker.appendChild(btn);
+    }
+  }
+
   /* ---------------- Composición de tests ---------------- */
   function sampleQuestions(topics, count) {
     const pool = BANK.filter((q) => topics.includes(q.t));
@@ -245,6 +269,21 @@
     });
   }
 
+  function startSection(section) {
+    const questions = shuffle(BANK.filter((q) => q.s === section.id));
+    if (questions.length === 0) {
+      alert("No hay preguntas disponibles en esta sección.");
+      return;
+    }
+    beginQuiz(questions, {
+      mode: "section",
+      label: section.badge || section.label,
+      immediate: prefs.feedback === "immediate",
+      penalty: Number(prefs.penalty),
+      timed: false
+    });
+  }
+
   function startReview() {
     const failedSet = new Set(stats.failedIds);
     const questions = shuffle(BANK.filter((q) => failedSet.has(q.id)));
@@ -285,7 +324,8 @@
     const modeLabels = {
       exam: quiz.immediate ? "Simulacro comentado" : "Simulacro",
       practice: "Práctica",
-      review: "Repaso de fallos"
+      review: "Repaso de fallos",
+      section: opts.label ? `Sección · ${opts.label}` : "Sección dirigida"
     };
     $("#modeBadge").textContent = modeLabels[quiz.mode] || "Test";
     $("#timerDisplay").classList.toggle("hidden", !quiz.timed);
@@ -769,6 +809,7 @@
     $("#feedbackSelect").value = prefs.feedback;
     $("#timerToggle").checked = prefs.timer;
     renderTopicPicker();
+    renderSectionPicker();
     renderHome();
     bindEvents();
   }

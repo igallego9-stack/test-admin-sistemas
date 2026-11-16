@@ -23,7 +23,7 @@ const BANK_CLUSTERS = [
     e: "El documento distingue cinco arquitecturas: HPC (alto rendimiento), HTC (alto throughput), HA (alta disponibilidad), LB (balanceo de carga) y almacenamiento distribuido."
   },
   {
-    id: "cl-03", t: "CLUSTERS", k: "Teoría",
+    id: "cl-03", t: "CLUSTERS", s: "HPC vs HTC", k: "Teoría",
     q: "¿Cuál es la métrica de optimización de un clúster HPC?",
     o: [
       "La latencia o tiempo de solución (Time to Solution).",
@@ -34,7 +34,7 @@ const BANK_CLUSTERS = [
     e: "HPC busca minimizar el Time to Solution (TTS), es decir, el tiempo que tarda en resolverse el problema. La latencia de comunicación es crítica."
   },
   {
-    id: "cl-04", t: "CLUSTERS", k: "Teoría",
+    id: "cl-04", t: "CLUSTERS", s: "HPC vs HTC", k: "Teoría",
     q: "¿Qué tipo de acoplamiento tienen las tareas en un clúster HPC?",
     o: [
       "Fuerte: la evolución de un nodo depende de sus vecinos y todos deben sincronizarse.",
@@ -45,7 +45,7 @@ const BANK_CLUSTERS = [
     e: "En HPC las tareas son altamente interdependientes (acoplamiento fuerte). Cualquier retraso significativo en la comunicación paraliza el clúster porque los nodos esperan la sincronización."
   },
   {
-    id: "cl-05", t: "CLUSTERS", k: "Teoría",
+    id: "cl-05", t: "CLUSTERS", s: "HPC vs HTC", k: "Teoría",
     q: "¿Qué tecnologías son típicas de un clúster HPC?",
     o: [
       "MPI, InfiniBand u OmniPath, y schedulers como Slurm o PBS.",
@@ -56,7 +56,7 @@ const BANK_CLUSTERS = [
     e: "HPC usa MPI como estándar de comunicación, redes de ultrabaja latencia como InfiniBand u OmniPath, y gestores de cola como Slurm o PBS/Torque. También puede usar GPU o FPGA."
   },
   {
-    id: "cl-06", t: "CLUSTERS", k: "Teoría",
+    id: "cl-06", t: "CLUSTERS", s: "HPC vs HTC", k: "Teoría",
     q: "¿Qué supone llevar HPC a la nube?",
     o: [
       "Externaliza el hardware y da elasticidad, pero no elimina la necesidad de optimizar el entorno.",
@@ -67,7 +67,7 @@ const BANK_CLUSTERS = [
     e: "HPC en la nube reduce la necesidad de construir CPD propios y ofrece aprovisionamiento dinámico, pero el usuario debe personalizar el SO y el software para cada carga. Se externaliza el hardware, no la complejidad de configuración."
   },
   {
-    id: "cl-07", t: "CLUSTERS", k: "Teoría",
+    id: "cl-07", t: "CLUSTERS", s: "HPC vs HTC", k: "Teoría",
     q: "¿Cuál es la métrica de optimización de un clúster HTC?",
     o: [
       "El throughput: volumen de tareas completadas con éxito por unidad de tiempo.",
@@ -78,7 +78,7 @@ const BANK_CLUSTERS = [
     e: "HTC maximiza el número total de tareas finalizadas por unidad de tiempo. No le importa tanto la velocidad de una tarea individual como la eficiencia global del sistema de colas."
   },
   {
-    id: "cl-08", t: "CLUSTERS", k: "Teoría",
+    id: "cl-08", t: "CLUSTERS", s: "HPC vs HTC", k: "Teoría",
     q: "¿Qué tipo de tareas encajan en un clúster HTC?",
     o: [
       "Miles o millones de tareas independientes, sin comunicación ni sincronización entre ellas.",
@@ -89,14 +89,14 @@ const BANK_CLUSTERS = [
     e: "HTC se emplea cuando el problema se divide en muchas tareas independientes. La comunicación de baja latencia no es un factor limitante, por lo que se pueden usar recursos heterogéneos y oportunistas."
   },
   {
-    id: "cl-09", t: "CLUSTERS", k: "Teoría",
+    id: "cl-09", t: "CLUSTERS", s: "HPC vs HTC", k: "Teoría",
     q: "¿Cuál es la tecnología líder para gestionar cargas HTC?",
     o: ["HTCondor (HTCSS)", "Slurm con MPI", "Pacemaker con Corosync"],
     c: 0,
     e: "HTCondor (HTCSS) está diseñado para automatizar y gestionar cargas de alto throughput, incluso con recursos dispersos. Slurm con MPI se orienta a HPC y Pacemaker con Corosync a alta disponibilidad."
   },
   {
-    id: "cl-10", t: "CLUSTERS", k: "Teoría",
+    id: "cl-10", t: "CLUSTERS", s: "HPC vs HTC", k: "Teoría",
     q: "¿Qué papel tienen el checkpointing y la migración de trabajos en HTC?",
     o: [
       "Detener y reanudar tareas en distintos nodos de forma transparente ante fallos o reasignaciones.",
@@ -107,7 +107,7 @@ const BANK_CLUSTERS = [
     e: "El checkpointing guarda el estado de una tarea y la migración la mueve a otro nodo. Así se gestionan fallos y reasignaciones sin que el usuario lo note, algo clave en entornos oportunistas."
   },
   {
-    id: "cl-11", t: "CLUSTERS", k: "Teoría",
+    id: "cl-11", t: "CLUSTERS", s: "HPC vs HTC", k: "Teoría",
     q: "¿Cuál es la distinción fundamental entre HPC y HTC?",
     o: [
       "HPC prioriza latencia con tareas acopladas; HTC prioriza throughput con tareas sueltas.",
@@ -257,7 +257,7 @@ const BANK_CLUSTERS = [
     e: "La capacidad no garantiza rendimiento para todas las cargas. GlusterFS va bien con archivos grandes y alto throughput; Ceph o soluciones de bloques dedicadas son mejores cuando la latencia de metadatos y las transacciones importan."
   },
   {
-    id: "cl-25", t: "CLUSTERS", k: "Caso práctico",
+    id: "cl-25", t: "CLUSTERS", s: "HPC vs HTC", k: "Caso práctico",
     q: "Un centro de investigación simula el clima: cada celda depende de las vecinas y los nodos deben sincronizarse constantemente. ¿Qué clúster es adecuado?",
     o: [
       "HPC, porque las celdas dependen entre sí y necesitan una red de ultrabaja latencia.",
@@ -268,7 +268,7 @@ const BANK_CLUSTERS = [
     e: "Es un problema fuertemente acoplado: la evolución de un nodo depende de sus vecinos y la comunicación es crítica. Necesita HPC con red de ultrabaja latencia y MPI."
   },
   {
-    id: "cl-26", t: "CLUSTERS", k: "Caso práctico",
+    id: "cl-26", t: "CLUSTERS", s: "HPC vs HTC", k: "Caso práctico",
     q: "Un estudio de animación debe renderizar miles de fotogramas independientes con presupuesto limitado. ¿Qué enfoque encaja mejor?",
     o: [
       "HTC, porque los fotogramas son tareas independientes y se maximiza el throughput.",
@@ -321,5 +321,115 @@ const BANK_CLUSTERS = [
     ],
     c: 0,
     e: "La escalabilidad vertical crece dentro de un nodo añadiendo recursos, y está limitada por el hardware máximo conectable. La horizontal añade más nodos o máquinas al clúster."
+  },
+  {
+    id: "cl-31", t: "CLUSTERS", s: "HPC vs HTC", k: "Caso práctico",
+    q: "Un laboratorio ejecuta millones de simulaciones de Monte Carlo independientes y solo agrega los resultados al final. ¿Qué arquitectura prioriza?",
+    o: [
+      "HTC, porque cada simulación es independiente y prima completar muchas por hora.",
+      "HPC, porque cada simulación exige sincronizar sus nodos en cada iteración del cálculo.",
+      "HA, porque el laboratorio no puede permitirse perder ninguna simulación aunque sea lenta."
+    ],
+    c: 0,
+    e: "Las simulaciones de Monte Carlo de este caso son tareas independientes: no comparten estado ni se sincronizan. HTC maximiza el throughput, es decir, cuántas terminan por unidad de tiempo. HPC se reserva para cálculos fuertemente acoplados y HA para mantener un servicio disponible."
+  },
+  {
+    id: "cl-32", t: "CLUSTERS", s: "HPC vs HTC", k: "Caso práctico",
+    q: "Un equipo de aerodinámica divide un ala en celdas y cada nodo intercambia datos con sus vecinos en cada paso temporal. ¿Qué necesita?",
+    o: [
+      "HPC con MPI y una red de baja latencia, porque las celdas están fuertemente acopladas.",
+      "HTC con HTCondor, porque cada celda se puede procesar de forma independiente y sin esperar.",
+      "LB con HAProxy, porque reparte las peticiones entre los nodos del clúster y equilibra la carga."
+    ],
+    c: 0,
+    e: "La malla está particionada, pero las celdas vecinas intercambian datos en cada iteración. Ese acoplamiento fuerte exige HPC, MPI y una red de ultrabaja latencia; HTC y LB no resuelven la sincronización."
+  },
+  {
+    id: "cl-33", t: "CLUSTERS", s: "HPC vs HTC", k: "Caso práctico",
+    q: "Una editorial digitaliza dos millones de páginas y aplica OCR a cada página por separado. ¿Qué enfoque encaja mejor?",
+    o: [
+      "HTC, porque cada página es una tarea independiente y se busca completar el lote cuanto antes.",
+      "HPC, porque el OCR de cada página requiere comunicación constante entre todos los nodos.",
+      "HA, porque si falla una página el servicio completo debe conmutar a otro nodo."
+    ],
+    c: 0,
+    e: "Cada página se puede procesar sin comunicación con las demás y el objetivo es terminar el lote. Es un caso típico de HTC: muchas tareas independientes, recursos heterogéneos y reintentos si alguna falla."
+  },
+  {
+    id: "cl-34", t: "CLUSTERS", s: "HPC vs HTC", k: "Caso práctico",
+    q: "Un grupo entrena una red neuronal con sincronización de gradientes entre 64 GPU en cada paso. ¿Qué arquitectura necesita?",
+    o: [
+      "HPC, porque la latencia de comunicación es crítica y todos los nodos deben sincronizarse.",
+      "HTC, porque cada GPU puede entrenar una red distinta y agregar los modelos al final.",
+      "LB, porque reparte las peticiones de entrenamiento entre las GPU disponibles del clúster."
+    ],
+    c: 0,
+    e: "El entrenamiento síncrono intercambia gradientes en cada paso: si una GPU llega tarde, todas esperan. Es un patrón HPC con comunicación colectiva y red de baja latencia. HTC encajaría si cada modelo fuese independiente."
+  },
+  {
+    id: "cl-35", t: "CLUSTERS", s: "HPC vs HTC", k: "Caso práctico",
+    q: "Un servicio de genómica alinea millones de lecturas cortas y cada lectura se procesa por separado. ¿Qué prioriza?",
+    o: [
+      "HTC, porque hay muchas tareas independientes y lo importante es el número de lecturas por hora.",
+      "HPC, porque cada lectura necesita una red de ultrabaja latencia y sincronización con MPI.",
+      "HA, porque el servicio debe seguir disponible aunque falle un nodo y se pierdan lecturas."
+    ],
+    c: 0,
+    e: "El alineamiento de lecturas cortas se divide en millones de trabajos independientes; interesa el throughput y tolerar fallos por tarea. HTC con un buen scheduler y checkpointing es el enfoque habitual."
+  },
+  {
+    id: "cl-36", t: "CLUSTERS", s: "HPC vs HTC", k: "Caso práctico",
+    q: "Una petrolera simula ondas sísmicas en un modelo 3D y los nodos intercambian fronteras en cada paso. ¿Qué arquitectura es adecuada?",
+    o: [
+      "HPC con MPI, porque la simulación está fuertemente acoplada y depende de la comunicación.",
+      "HTC con HTCondor, porque cada punto del modelo se calcula sin comunicarse con los demás.",
+      "LB con NGINX, porque distribuye las consultas sísmicas entre los servidores backend."
+    ],
+    c: 0,
+    e: "La propagación de ondas requiere intercambiar las fronteras de cada subdominio en cada paso temporal. Es un cálculo fuertemente acoplado, propio de HPC con MPI y red de baja latencia."
+  },
+  {
+    id: "cl-37", t: "CLUSTERS", s: "HPC vs HTC", k: "Caso práctico",
+    q: "Un estudio convierte 50.000 vídeos a varios formatos y cada conversión es independiente y reintentable. ¿Qué enfoque encaja?",
+    o: [
+      "HTC, porque cada vídeo es una tarea independiente y se maximiza el throughput.",
+      "HPC, porque todas las conversiones deben sincronizarse en cada fotograma.",
+      "HA, porque el estudio necesita failover automático entre los nodos de conversión."
+    ],
+    c: 0,
+    e: "Cada conversión es independiente y se puede reintentar sin afectar a las demás. HTC prioriza completar el lote y aprovechar recursos heterogéneos; HPC solo tendría sentido si las tareas se sincronizaran."
+  },
+  {
+    id: "cl-38", t: "CLUSTERS", s: "HPC vs HTC", k: "Caso práctico",
+    q: "Un centro meteorológico quiere reducir el tiempo que tarda en resolverse una simulación con malla particionada y MPI. ¿Qué métrica prioriza?",
+    o: [
+      "El Time to Solution de HPC, porque importa la latencia de la tarea acoplada.",
+      "El throughput de HTC, porque importa completar muchas simulaciones por hora.",
+      "El RTO y el RPO de HA, porque importa recuperar el servicio tras un fallo."
+    ],
+    c: 0,
+    e: "Si el objetivo es que una simulación acoplada termine antes, la métrica es el Time to Solution (TTS) de HPC. El throughput de HTC mide tareas terminadas por hora, no la latencia de una única tarea."
+  },
+  {
+    id: "cl-39", t: "CLUSTERS", s: "HPC vs HTC", k: "Caso práctico",
+    q: "Una empresa procesa cada noche millones de facturas independientes, algunas fallan y se reintentan. ¿Qué prioriza?",
+    o: [
+      "HTC con checkpointing, porque busca completar el lote y tolerar fallos por tarea.",
+      "HPC con MPI, porque todas las facturas deben sincronizarse en cada paso.",
+      "HA con failover, porque cada factura necesita un nodo de respaldo dedicado."
+    ],
+    c: 0,
+    e: "Las facturas son tareas independientes y el objetivo es terminar el lote antes del amanecer. HTC con checkpointing y reintentos tolera fallos sin reiniciar todo el proceso; HPC no aporta nada aquí."
+  },
+  {
+    id: "cl-40", t: "CLUSTERS", s: "HPC vs HTC", k: "Caso práctico",
+    q: "Una universidad aprovecha ordenadores de aulas cuando están libres para ejecutar prácticas independientes. ¿Qué modelo encaja?",
+    o: [
+      "HTC oportunista con HTCondor, porque usa recursos dispersos y tareas independientes.",
+      "HPC dedicado con InfiniBand, porque necesita una red de ultrabaja latencia.",
+      "HA activo-pasivo, porque los equipos de las aulas deben conmutar entre sí."
+    ],
+    c: 0,
+    e: "Los equipos están dispersos, no son dedicados y las prácticas son independientes. HTC con HTCondor y checkpointing aprovecha esos recursos oportunistas; HPC exige un clúster dedicado y una red de baja latencia."
   }
 ];

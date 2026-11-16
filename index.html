@@ -171,6 +171,22 @@
     .topic-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: .7; }
     .practice-controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; }
     .practice-controls select { width: 100%; min-width: 0; }
+    .section-block { margin-top: 2px; padding-top: 12px; border-top: 1px dashed var(--border); }
+    .section-title { display: block; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 800; margin-bottom: 7px; }
+    .section-picker { display: grid; gap: 7px; }
+    .section-btn {
+      display: flex; align-items: center; gap: 9px; width: 100%; text-align: left;
+      border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
+      border-radius: 11px; padding: 9px 11px; font: inherit; cursor: pointer;
+      transition: border-color .15s ease, background .15s ease, transform .15s ease;
+    }
+    .section-btn:hover { border-color: color-mix(in srgb, var(--primary) 45%, var(--border)); background: var(--surface); transform: translateY(-1px); }
+    .section-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+    .section-copy { min-width: 0; }
+    .section-btn strong { display: block; font-size: 12.5px; line-height: 1.25; }
+    .section-btn small { display: block; font-size: 10.5px; color: var(--muted); line-height: 1.35; margin-top: 1px; }
+    .section-dot { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; }
+    .section-arrow { margin-left: auto; color: var(--muted); font-weight: 800; flex: 0 0 auto; }
     select {
       width: 100%; border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
       border-radius: 10px; padding: 9px 11px; font-size: 13px; outline: none;
@@ -437,6 +453,10 @@
               </select>
               <button class="btn teal small" id="practiceBtn" type="button">Practicar</button>
             </div>
+            <div class="section-block">
+              <span class="section-title">Secciones dirigidas · repaso completo</span>
+              <div class="section-picker" id="sectionPicker"></div>
+            </div>
           </div>
         </article>
 
@@ -615,7 +635,8 @@
           <li><b>Jerarquía:</b> OU ⊂ dominio ⊂ árbol ⊂ bosque. Dominio = frontera de seguridad; árbol = namespace contiguo; bosque = árboles con confianza.</li>
           <li><b>Nombres:</b> DN (ruta completa), RDN (sin dominio/OU), UPN (usuario@dominio), SID (cambia de dominio), GUID (nunca cambia), NetBIOS (compatibilidad).</li>
           <li><b>CD:</b> autentica y replica. <b>RODC:</b> solo lectura, sucursales, no tolerancia a fallos.</li>
-          <li><b>GPO:</b> máquina al arrancar, usuario al logon; refresco 90 ± 30 min; orden Sitio > Dominio > OU > Grupo > Equipo > Usuario; gana la más específica.</li>
+          <li><b>GPO:</b> máquina al arrancar, usuario al logon; refresco 90 ± 30 min (DC 5 min); seguridad 16 h; orden Sitio > Dominio > OU > Grupo > Equipo > Usuario; gana la más específica.</li>
+          <li><b>Tiempos AD:</b> intra-sitio 15 s (pausa 3 s); entre sitios 180 min (mín. 15); KCC 15 min; tombstone 180 días; GC 12 h.</li>
           <li><b>PowerShell:</b> orientado a objetos; MONAD 2003 → PowerShell 2006 → Core 2016; alias dir/ls/gci.</li>
         </ul>
       </article>
@@ -624,6 +645,7 @@
         <ul>
           <li><b>HPC:</b> minimiza latencia/TTS; tareas fuertemente acopladas; MPI, InfiniBand, Slurm/PBS, GPU/FPGA.</li>
           <li><b>HTC:</b> maximiza throughput; tareas independientes; HTCondor, checkpointing, Grid Engine; no necesita red de ultrabaja latencia.</li>
+          <li><b>Cómo decidir:</b> si las tareas se comunican y sincronizan en cada paso → HPC; si son independientes y prima completar muchas por hora → HTC.</li>
           <li><b>HA:</b> continuidad y failover; RTO/RPO ≈ 0; activo-pasivo vs activo-activo; Pacemaker (recursos) + Corosync (heartbeat); failback.</li>
           <li><b>LB:</b> reparte tráfico entrante; escalado horizontal; Weighted Round-Robin (estático) vs dinámicos; HAProxy, NGINX Plus.</li>
           <li><b>Almacenamiento:</b> SDS; Ceph (S3, RBD, CephFS), GlusterFS (hasta 16 EB, mal rendimiento de metadatos); elegir por perfil de E/S.</li>

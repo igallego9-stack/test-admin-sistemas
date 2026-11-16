@@ -604,5 +604,126 @@ const BANK_ADAMP = [
     ],
     c: 0,
     e: "Las extensiones del lado del cliente (CSE) condicionan la aplicación. Algunas configuraciones, como la instalación de software, necesitan un reinicio o un inicio de sesión para aplicarse por completo."
+  },
+  {
+    id: "ad-56", t: "ADAMP", s: "Replicación y GPO", k: "Teoría",
+    q: "¿Cuánto tiempo se conservan por defecto los objetos eliminados de Active Directory antes de purgarse?",
+    o: [
+      "180 días, el tombstone lifetime predeterminado en dominios actuales.",
+      "60 días, el valor fijo que no se puede modificar en el bosque.",
+      "12 horas, el mismo intervalo que usa la recolección de basura."
+    ],
+    c: 0,
+    e: "El tombstone lifetime por defecto es de 180 días en dominios creados con Windows Server 2003 SP1 o posterior; en versiones anteriores eran 60 días. Durante ese plazo los objetos eliminados se conservan como tombstones y pueden recuperarse."
+  },
+  {
+    id: "ad-57", t: "ADAMP", s: "Replicación y GPO", k: "Teoría",
+    q: "¿Cada cuánto ejecuta cada controlador de dominio la recolección de basura (garbage collection)?",
+    o: [
+      "Cada 12 horas, eliminando los tombstones más antiguos que el tombstone lifetime.",
+      "Cada 15 minutos, coincidiendo con el recálculo de topología que hace el KCC.",
+      "Cada 180 días, justo cuando caduca el tombstone lifetime configurado en el bosque."
+    ],
+    c: 0,
+    e: "La recolección de basura se ejecuta cada 12 horas en cada DC y elimina definitivamente los tombstones que superan el tombstone lifetime. No confundir con el KCC (15 minutos) ni con la caducidad del tombstone (180 días)."
+  },
+  {
+    id: "ad-58", t: "ADAMP", s: "Replicación y GPO", k: "Teoría",
+    q: "¿Cada cuánto recalcula el KCC la topología de replicación de Active Directory?",
+    o: [
+      "Cada 15 minutos, ajustando las conexiones entre controladores de dominio.",
+      "Cada 15 segundos, con una pausa de 3 segundos entre notificaciones.",
+      "Cada 180 minutos, igual que el intervalo entre sitios predeterminado."
+    ],
+    c: 0,
+    e: "El Knowledge Consistency Checker revisa y ajusta la topología cada 15 minutos. No confundir con la notificación intra-sitio (15 segundos) ni con el intervalo entre sitios (180 minutos)."
+  },
+  {
+    id: "ad-59", t: "ADAMP", s: "Replicación y GPO", k: "Teoría",
+    q: "¿Cada cuánto comprueban los controladores de dominio los cambios en las GPO de equipo?",
+    o: [
+      "Cada 5 minutos, un intervalo más corto que el de los equipos cliente.",
+      "Cada 90 minutos, con un desfase aleatorio de hasta 30 minutos en cada equipo.",
+      "Cada 16 horas, igual que el refresco periódico de las directivas de seguridad."
+    ],
+    c: 0,
+    e: "Los controladores de dominio comprueban los cambios de directiva de equipo cada 5 minutos. Los clientes y servidores miembro lo hacen cada 90 minutos con un desfase aleatorio de hasta 30 minutos."
+  },
+  {
+    id: "ad-60", t: "ADAMP", s: "Replicación y GPO", k: "Teoría",
+    q: "¿Cada cuánto se reaplican las directivas de seguridad aunque la GPO no haya cambiado?",
+    o: [
+      "Cada 16 horas, incluso si no se ha modificado ninguna directiva.",
+      "Cada 90 minutos, con el mismo desfase aleatorio que las demás GPO.",
+      "Cada 5 minutos, porque los controladores de dominio las refrescan siempre."
+    ],
+    c: 0,
+    e: "Las directivas de seguridad se aplican cada 16 horas (960 minutos) aunque la GPO no cambie. No deben confundirse con el refresco general de GPO (90 ± 30 minutos) ni con el de los DC (5 minutos)."
+  },
+  {
+    id: "ad-61", t: "ADAMP", s: "Replicación y GPO", k: "Teoría",
+    q: "¿Cuál de estos cambios dispara una replicación urgente entre controladores del mismo sitio?",
+    o: [
+      "El bloqueo de una cuenta o un cambio en la política de contraseñas del dominio.",
+      "La modificación de la descripción de un usuario o de su número de teléfono.",
+      "La creación de una unidad organizativa nueva dentro de un dominio del bosque."
+    ],
+    c: 0,
+    e: "La replicación urgente se activa con cambios críticos: bloqueo de cuenta, secretos LSA, contraseña de la cuenta de equipo del DC, cambio del maestro RID, política de bloqueo y política de contraseñas. No se usa para cambios ordinarios de atributos."
+  },
+  {
+    id: "ad-62", t: "ADAMP", s: "Replicación y GPO", k: "Caso práctico",
+    q: "Un usuario se bloquea en un DC y otro DC del mismo sitio debe enterarse. ¿Cuándo se replica el bloqueo?",
+    o: [
+      "De inmediato, porque el bloqueo activa la replicación urgente.",
+      "En la siguiente notificación ordinaria, unos 15 segundos después.",
+      "Cuando el KCC recalcule la topología, cada 15 minutos."
+    ],
+    c: 0,
+    e: "El bloqueo de cuenta es uno de los cambios que activan la replicación urgente: se notifica de inmediato a los socios del mismo sitio, sin esperar el ciclo normal de 15 segundos."
+  },
+  {
+    id: "ad-63", t: "ADAMP", s: "Replicación y GPO", k: "Caso práctico",
+    q: "Una sede remota con un enlace WAN lento replica con el centro de datos. ¿Qué configuración es la habitual?",
+    o: [
+      "Intervalo de 180 minutos, con horario de replicación y compresión entre sitios.",
+      "Notificación cada 15 segundos, con una pausa de 3 segundos entre socios.",
+      "Refresco cada 5 minutos, igual que las GPO de los controladores de dominio."
+    ],
+    c: 0,
+    e: "Entre sitios, el intervalo predeterminado es de 180 minutos y puede ajustarse con un horario para no saturar el WAN. La notificación de 15 segundos con pausa de 3 segundos es intra-sitio."
+  },
+  {
+    id: "ad-64", t: "ADAMP", s: "Replicación y GPO", k: "Caso práctico",
+    q: "Acabas de cambiar una GPO y un portátil no la aplica. ¿Qué haces para forzarla sin esperar al refresco normal?",
+    o: [
+      "Ejecutar gpupdate /force y, si es política de usuario, cerrar y abrir sesión.",
+      "Ejecutar repadmin /syncall y reiniciar el servicio de directivas del cliente.",
+      "Esperar 16 horas, porque las GPO solo se reaplican en ese intervalo."
+    ],
+    c: 0,
+    e: "gpupdate /force reaplica la configuración en el equipo local. Las políticas de usuario pueden requerir cerrar y abrir sesión, y algunas de equipo requieren reinicio. repadmin /syncall se usa para replicar AD, no para refrescar GPO."
+  },
+  {
+    id: "ad-65", t: "ADAMP", s: "Replicación y GPO", k: "Caso práctico",
+    q: "Un controlador de dominio ha estado apagado 200 días. ¿Por qué no conviene reconectarlo directamente al bosque?",
+    o: [
+      "Porque supera el tombstone lifetime de 180 días y puede reintroducir objetos eliminados.",
+      "Porque el KCC lo expulsa del bosque a los 15 minutos y hay que volver a promoverlo.",
+      "Porque la recolección de basura borra su base de datos cada 12 horas sin avisar."
+    ],
+    c: 0,
+    e: "Si un DC está desconectado más tiempo que el tombstone lifetime (180 días por defecto), puede conservar objetos que ya se eliminaron en el resto del bosque y reintroducirlos como lingering objects. Hay que limpiarlo o restaurarlo de forma controlada."
+  },
+  {
+    id: "ad-66", t: "ADAMP", s: "Replicación y GPO", k: "Teoría",
+    q: "¿Qué hace exactamente la recolección de basura de Active Directory?",
+    o: [
+      "Elimina definitivamente los tombstones más antiguos que el tombstone lifetime.",
+      "Replica de inmediato los cambios urgentes entre los controladores del sitio.",
+      "Actualiza las GPO de los clientes cada 90 minutos con un desfase aleatorio."
+    ],
+    c: 0,
+    e: "La recolección de basura purga del directorio los tombstones que ya superaron el tombstone lifetime. La replicación urgente y la actualización de GPO son procesos distintos."
   }
 ];
